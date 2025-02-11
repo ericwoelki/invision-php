@@ -1,0 +1,56 @@
+{
+    "name": "ericwoelki/invision-php",
+    "description": "PHP api client for Invision Community.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric Woelki",
+            "email": "ericwoelki@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.3.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.20",
+        "pestphp/pest": "^3.7",
+        "phpstan/phpstan": "^2.1",
+        "rector/rector": "^2.0",
+        "symfony/var-dumper": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "EricWoelki\\Invision\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "analyze": "phpstan analyze",
+        "refactor": "rector",
+        "lint": "pint",
+        "test:refactor": "rector --dry-run",
+        "test:lint": "pint --test",
+        "test:analyze": "phpstan analyze",
+        "test:unit": "pest --parallel",
+        "test": [
+            "@test:refactor",
+            "@test:lint",
+            "@test:analyze",
+            "@test:unit"
+        ]
+    }
+}

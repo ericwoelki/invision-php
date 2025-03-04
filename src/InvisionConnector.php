@@ -6,8 +6,10 @@ namespace EricWoelki\Invision;
 
 use Saloon\Http\Auth\BasicAuthenticator;
 use Saloon\Http\Connector;
+use Saloon\Http\Request;
+use Saloon\PaginationPlugin\Contracts\HasPagination;
 
-final class InvisionConnector extends Connector
+final class InvisionConnector extends Connector implements HasPagination
 {
     public function __construct(
         private readonly string $url,
@@ -17,6 +19,11 @@ final class InvisionConnector extends Connector
     public function resolveBaseUrl(): string
     {
         return $this->url;
+    }
+
+    public function paginate(Request $request): InvisionPaginator
+    {
+        return new InvisionPaginator($this, $request);
     }
 
     protected function defaultAuth(): BasicAuthenticator

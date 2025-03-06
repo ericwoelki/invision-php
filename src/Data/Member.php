@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Data;
 
+use Carbon\CarbonImmutable;
+
 final readonly class Member
 {
     /**
@@ -20,7 +22,7 @@ final readonly class Member
         public Group $primaryGroup,
         public array $secondaryGroups,
         public string $email,
-        public string $joined,
+        public CarbonImmutable $joined,
         public string $registrationIpAddress,
         public int $warningPoints,
         public int $reputationPoints,
@@ -30,9 +32,9 @@ final readonly class Member
         public ?string $profileUrl,
         public bool $validating,
         public int $posts,
-        public ?string $lastActivity,
-        public ?string $lastVisit,
-        public ?string $lastPost,
+        public ?CarbonImmutable $lastActivity,
+        public ?CarbonImmutable $lastVisit,
+        public ?CarbonImmutable $lastPost,
         public int $profileViews,
         public ?string $birthday,
         public array $customFields,

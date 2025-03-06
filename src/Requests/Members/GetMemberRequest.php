@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Requests\Members;
 
+use Carbon\CarbonImmutable;
 use EricWoelki\Invision\Data\Field;
 use EricWoelki\Invision\Data\FieldGroup;
 use EricWoelki\Invision\Data\Group;
@@ -53,7 +54,7 @@ final class GetMemberRequest extends Request
                 formattedName: $group['formattedName'],
             ), $data['secondaryGroups']),
             email: $data['email'],
-            joined: $data['joined'],
+            joined: CarbonImmutable::parse($data['joined']),
             registrationIpAddress: $data['registrationIpAddress'],
             warningPoints: $data['warningPoints'],
             reputationPoints: $data['reputationPoints'],
@@ -63,9 +64,9 @@ final class GetMemberRequest extends Request
             profileUrl: $data['profileUrl'],
             validating: $data['validating'],
             posts: $data['posts'],
-            lastActivity: $data['lastActivity'],
-            lastVisit: $data['lastVisit'],
-            lastPost: $data['lastPost'],
+            lastActivity: $data['lastActivity'] ? CarbonImmutable::parse($data['lastActivity']) : null,
+            lastVisit: $data['lastVisit'] ? CarbonImmutable::parse($data['lastVisit']) : null,
+            lastPost: $data['lastPost'] ? CarbonImmutable::parse($data['lastPost']) : null,
             profileViews: $data['profileViews'],
             birthday: $data['birthday'],
             customFields: array_map(fn (array $fieldGroup): FieldGroup => new FieldGroup(

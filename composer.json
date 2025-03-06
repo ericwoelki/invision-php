@@ -11,6 +11,7 @@
     ],
     "require": {
         "php": "^8.3.0",
+        "nesbot/carbon": "^3.8",
         "saloonphp/pagination-plugin": "^2.2",
         "saloonphp/saloon": "^3.10"
     },

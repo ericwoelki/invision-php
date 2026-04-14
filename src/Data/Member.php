@@ -61,13 +61,13 @@ final readonly class Member
     {
         return new self(...array_merge($data, [
             'primaryGroup' => new Group(...$data['primaryGroup']),
-            'secondaryGroups' => array_map(fn (array $group): Group => Group::fromArray($group), $data['secondaryGroups']),
+            'secondaryGroups' => array_map(Group::fromArray(...), $data['secondaryGroups']),
             'joined' => CarbonImmutable::parse($data['joined']),
             'lastActivity' => $data['lastActivity'] ? CarbonImmutable::parse($data['lastActivity']) : null,
             'lastVisit' => $data['lastVisit'] ? CarbonImmutable::parse($data['lastVisit']) : null,
             'lastPost' => $data['lastPost'] ? CarbonImmutable::parse($data['lastPost']) : null,
-            'customFields' => array_map(fn (array $fieldGroup): FieldGroup => FieldGroup::fromArray($fieldGroup), $data['customFields']),
-            'rank' => $data['rank'] ? array_map(fn (array $rank): Rank => Rank::fromArray($rank), $data['rank']) : null,
+            'customFields' => array_map(FieldGroup::fromArray(...), $data['customFields']),
+            'rank' => $data['rank'] ? array_map(Rank::fromArray(...), $data['rank']) : null,
         ]));
     }
 }

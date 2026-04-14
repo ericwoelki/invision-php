@@ -21,7 +21,7 @@ final readonly class FieldGroup
     public static function fromArray(array $data): FieldGroup
     {
         return new self(...array_merge($data, [
-            'fields' => array_map(fn (array $field): Field => Field::fromArray($field), $data['fields']),
+            'fields' => array_map(Field::fromArray(...), $data['fields']),
         ]));
     }
 }

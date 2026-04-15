@@ -9,9 +9,12 @@ use Saloon\Http\Auth\BasicAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Http\Request;
 use Saloon\PaginationPlugin\Contracts\HasPagination;
+use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
 
 final class InvisionConnector extends Connector implements HasPagination
 {
+    use AlwaysThrowOnErrors;
+
     public function __construct(
         private readonly string $url,
         private readonly string $token,

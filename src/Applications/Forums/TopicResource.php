@@ -6,9 +6,11 @@ namespace EricWoelki\Invision\Applications\Forums;
 
 use EricWoelki\Invision\Applications\Forums\Payloads\CreateTopicPayload;
 use EricWoelki\Invision\Applications\Forums\Payloads\ListTopicsPayload;
+use EricWoelki\Invision\Applications\Forums\Payloads\UpdateTopicPayload;
 use EricWoelki\Invision\Applications\Forums\Requests\CreateTopicRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\GetTopicRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\ListTopicsRequest;
+use EricWoelki\Invision\Applications\Forums\Requests\UpdateTopicRequest;
 use EricWoelki\Invision\Data\Topic;
 use Saloon\Http\BaseResource;
 
@@ -32,6 +34,13 @@ final class TopicResource extends BaseResource
     public function create(CreateTopicPayload $payload): Topic
     {
         $request = new CreateTopicRequest($payload);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function update(UpdateTopicPayload $payload): Topic
+    {
+        $request = new UpdateTopicRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

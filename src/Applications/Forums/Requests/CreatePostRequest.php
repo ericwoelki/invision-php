@@ -36,6 +36,7 @@ final class CreatePostRequest extends Request implements HasBody
         return Post::fromArray($data);
     }
 
+    /** @return array<string, mixed> */
     protected function defaultBody(): array
     {
         return $this->payload->toArray();

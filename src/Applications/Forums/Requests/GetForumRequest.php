@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EricWoelki\Invision\Requests\Forums;
+namespace EricWoelki\Invision\Applications\Forums\Requests;
 
 use EricWoelki\Invision\Data\Forum;
 use Saloon\Enums\Method;

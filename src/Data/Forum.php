@@ -28,10 +28,16 @@ final readonly class Forum
     /** @param ForumData $data */
     public static function fromArray(array $data): Forum
     {
-        return new self(...array_merge($data, [
-            'type' => ForumType::from($data['type']),
-            'parentId' => $data['parentId'] ?? null,
-            'permissions' => Permissions::fromArray($data['permissions']),
-        ]));
+        return new self(
+            id: $data['id'],
+            name: $data['name'],
+            path: $data['path'],
+            type: ForumType::from($data['type']),
+            topics: $data['topics'],
+            url: $data['url'],
+            parentId: $data['parentId'],
+            permissions: Permissions::fromArray($data['permissions']),
+            club: $data['club'],
+        );
     }
 }

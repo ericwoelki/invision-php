@@ -16,6 +16,10 @@ final readonly class Group
     /** @param GroupData $data */
     public static function fromArray(array $data): Group
     {
-        return new self(...$data);
+        return new self(
+            id: $data['id'],
+            name: $data['name'],
+            formattedName: $data['formattedName'],
+        );
     }
 }

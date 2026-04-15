@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+namespace EricWoelki\Invision\Applications\Forums\Requests;
+
+use EricWoelki\Invision\Applications\Forums\Payloads\CreateForumPayload;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Traits\Body\HasFormBody;
+
+final class CreateForumRequest extends Request implements HasBody
+{
+    use HasFormBody;
+
+    protected Method $method = Method::POST;
+
+    public function __construct(
+        public readonly CreateForumPayload $payload,
+    ) {}
+
+    public function resolveEndpoint(): string
+    {
+        return 'forums/forums';
+    }
+
+    /** @return array<string, mixed> */
+    protected function defaultBody(): array
+    {
+        return $this->payload->toArray();
+    }
+}

@@ -10,4 +10,14 @@ enum ForumType: string
     case Questions = 'questions';
     case Category = 'category';
     case Redirect = 'redirect';
+
+    public function creationIdentifier(): string
+    {
+        return match ($this) {
+            self::Discussions => 'normal',
+            self::Questions => 'qa',
+            self::Category => 'category',
+            self::Redirect => 'redirect',
+        };
+    }
 }

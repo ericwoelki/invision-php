@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace EricWoelki\Invision\Requests\Members;
+namespace EricWoelki\Invision\Applications\System\Requests;
 
 use EricWoelki\Invision\Data\Member;
 use Saloon\Enums\Method;

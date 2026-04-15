@@ -16,14 +16,13 @@ use Carbon\CarbonImmutable;
  *  email: string, joined: string, registrationIpAddress: string,  warningPoints: int, reputationPoints: int, photoUrl: string,
  *  photoUrlIsDefault: bool, coverPhotoUrl: string, profileUrl: string|null, validating: bool, posts: int,
  *  lastActivity: string|null, lastVisit: string|null, lastPost: string|null, profileViews: int, birthday: string|null,
- *  customFields: list<FieldGroupData>, rank: list<RankData>|null, achievements_points: int, allowAdminEmails: bool, completed: bool}
+ *  customFields: list<FieldGroupData>, rank: RankData|null, achievements_points: int, allowAdminEmails: bool, completed: bool}
  */
 final readonly class Member
 {
     /**
      * @param  list<Group>  $secondaryGroups
      * @param  list<FieldGroup>  $customFields
-     * @param  list<Rank>|null  $rank
      */
     public function __construct(
         public int $id,
@@ -50,24 +49,44 @@ final readonly class Member
         public int $profileViews,
         public ?string $birthday,
         public array $customFields,
-        public ?array $rank,
-        public int $achievements_points,
+        public ?Rank $rank,
+        public int $achievementsPoints,
         public bool $allowAdminEmails,
-        public bool $completed,
+        public bool $registrationCompleted,
     ) {}
 
     /** @param MemberData $data */
     public static function fromArray(array $data): Member
     {
-        return new self(...array_merge($data, [
-            'primaryGroup' => new Group(...$data['primaryGroup']),
-            'secondaryGroups' => array_map(Group::fromArray(...), $data['secondaryGroups']),
-            'joined' => CarbonImmutable::parse($data['joined']),
-            'lastActivity' => $data['lastActivity'] ? CarbonImmutable::parse($data['lastActivity']) : null,
-            'lastVisit' => $data['lastVisit'] ? CarbonImmutable::parse($data['lastVisit']) : null,
-            'lastPost' => $data['lastPost'] ? CarbonImmutable::parse($data['lastPost']) : null,
-            'customFields' => array_map(FieldGroup::fromArray(...), $data['customFields']),
-            'rank' => $data['rank'] ? array_map(Rank::fromArray(...), $data['rank']) : null,
-        ]));
+        return new self(
+            id: $data['id'],
+            name: $data['name'],
+            title: $data['title'],
+            timeZone: $data['timeZone'],
+            formattedName: $data['formattedName'],
+            primaryGroup: Group::fromArray($data['primaryGroup']),
+            secondaryGroups: array_map(Group::fromArray(...), $data['secondaryGroups']),
+            email: $data['email'],
+            joined: CarbonImmutable::parse($data['joined']),
+            registrationIpAddress: $data['registrationIpAddress'],
+            warningPoints: $data['warningPoints'],
+            reputationPoints: $data['reputationPoints'],
+            photoUrl: $data['photoUrl'],
+            photoUrlIsDefault: $data['photoUrlIsDefault'],
+            coverPhotoUrl: $data['coverPhotoUrl'],
+            profileUrl: $data['profileUrl'],
+            validating: $data['validating'],
+            posts: $data['posts'],
+            lastActivity: $data['lastActivity'] ? CarbonImmutable::parse($data['lastActivity']) : null,
+            lastVisit: $data['lastVisit'] ? CarbonImmutable::parse($data['lastVisit']) : null,
+            lastPost: $data['lastPost'] ? CarbonImmutable::parse($data['lastPost']) : null,
+            profileViews: $data['profileViews'],
+            birthday: $data['birthday'],
+            customFields: array_map(FieldGroup::fromArray(...), $data['customFields']),
+            rank: $data['rank'] ? Rank::fromArray($data['rank']) : null,
+            achievementsPoints: $data['achievements_points'],
+            allowAdminEmails: $data['allowAdminEmails'],
+            registrationCompleted: $data['completed'],
+        );
     }
 }

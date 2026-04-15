@@ -20,8 +20,9 @@ final readonly class FieldGroup
     /** @param FieldGroupData $data */
     public static function fromArray(array $data): FieldGroup
     {
-        return new self(...array_merge($data, [
-            'fields' => array_map(Field::fromArray(...), $data['fields']),
-        ]));
+        return new self(
+            name: $data['name'],
+            fields: array_map(Field::fromArray(...), $data['fields']),
+        );
     }
 }

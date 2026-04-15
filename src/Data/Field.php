@@ -15,6 +15,9 @@ final readonly class Field
     /** @param FieldData $data */
     public static function fromArray(array $data): Field
     {
-        return new self(...$data);
+        return new self(
+            name: $data['name'],
+            value: $data['value'],
+        );
     }
 }

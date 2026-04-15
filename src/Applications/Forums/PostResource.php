@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace EricWoelki\Invision\Applications\Forums;
 
 use EricWoelki\Invision\Applications\Forums\Payloads\CreatePostPayload;
+use EricWoelki\Invision\Applications\Forums\Payloads\UpdatePostPayload;
 use EricWoelki\Invision\Applications\Forums\Requests\CreatePostRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\GetPostRequest;
+use EricWoelki\Invision\Applications\Forums\Requests\UpdatePostRequest;
 use EricWoelki\Invision\Data\Post;
 use Saloon\Http\BaseResource;
 
@@ -22,6 +24,13 @@ final class PostResource extends BaseResource
     public function create(CreatePostPayload $payload): Post
     {
         $request = new CreatePostRequest($payload);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function update(UpdatePostPayload $payload): Post
+    {
+        $request = new UpdatePostRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\Forums;
 
+use EricWoelki\Invision\Applications\Forums\Payloads\CreateTopicPayload;
 use EricWoelki\Invision\Applications\Forums\Payloads\ListTopicsPayload;
+use EricWoelki\Invision\Applications\Forums\Requests\CreateTopicRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\GetTopicRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\ListTopicsRequest;
 use EricWoelki\Invision\Data\Topic;
@@ -23,6 +25,13 @@ final class TopicResource extends BaseResource
     public function get(int $id): Topic
     {
         $request = new GetTopicRequest($id);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function create(CreateTopicPayload $payload): Topic
+    {
+        $request = new CreateTopicRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

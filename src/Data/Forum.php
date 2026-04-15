@@ -9,7 +9,7 @@ use EricWoelki\Invision\Enums\ForumType;
 /**
  * @phpstan-import-type PermissionsData from Permissions
  *
- * @phpstan-type ForumData array{id: int, name: string, path: string, type: string, topics: int, url: string, parentId: int|null, permissions: PermissionsData, club: int}
+ * @phpstan-type ForumData array{id: int, name: string, path: string, type: string, topics: int|null, url: string, parentId: int|null, permissions: PermissionsData, club: int}
  */
 final readonly class Forum
 {
@@ -33,7 +33,7 @@ final readonly class Forum
             name: $data['name'],
             path: $data['path'],
             type: ForumType::from($data['type']),
-            topics: $data['topics'],
+            topics: $data['topics'] ?? 0,
             url: $data['url'],
             parentId: $data['parentId'],
             permissions: Permissions::fromArray($data['permissions']),

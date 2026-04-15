@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\System;
 
+use EricWoelki\Invision\Applications\System\Payloads\CreateMemberPayload;
 use EricWoelki\Invision\Applications\System\Payloads\ListMembersPayload;
+use EricWoelki\Invision\Applications\System\Requests\CreateMemberRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetMemberRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListMembersRequest;
 use EricWoelki\Invision\Data\Member;
@@ -23,6 +25,13 @@ final class MemberResource extends BaseResource
     public function get(int $id): Member
     {
         $request = new GetMemberRequest($id);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function create(CreateMemberPayload $payload): Member
+    {
+        $request = new CreateMemberRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

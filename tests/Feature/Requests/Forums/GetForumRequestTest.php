@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use EricWoelki\Invision\Requests\Forums\GetForumRequest;
+use EricWoelki\Invision\Applications\Forums\Requests\GetForumRequest;
 
 it('resolves the endpoint', function (): void {
     $request = new GetForumRequest(1);

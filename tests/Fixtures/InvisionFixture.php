@@ -16,4 +16,13 @@ final class InvisionFixture extends Fixture
             'Set-Cookie' => 'REDACTED',
         ];
     }
+
+    #[Override]
+    protected function defineSensitiveJsonParameters(): array
+    {
+        return [
+            'email' => 'REDACTED',
+            'registrationIpAddress' => 'REDACTED',
+        ];
+    }
 }

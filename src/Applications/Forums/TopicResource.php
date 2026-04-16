@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Forums\Payloads\CreateTopicPayload;
 use EricWoelki\Invision\Applications\Forums\Payloads\ListTopicsPayload;
 use EricWoelki\Invision\Applications\Forums\Payloads\UpdateTopicPayload;
 use EricWoelki\Invision\Applications\Forums\Requests\CreateTopicRequest;
+use EricWoelki\Invision\Applications\Forums\Requests\DeleteTopicRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\GetTopicRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\ListTopicsRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\UpdateTopicRequest;
@@ -43,5 +44,10 @@ final class TopicResource extends BaseResource
         $request = new UpdateTopicRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteTopicRequest($id));
     }
 }

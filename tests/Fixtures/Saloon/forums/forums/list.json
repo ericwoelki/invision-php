@@ -1,0 +1,25 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Thu, 16 Apr 2026 02:39:17 GMT",
+        "Server": "Apache\/2.4.58 (Ubuntu)",
+        "Set-Cookie": "REDACTED",
+        "Expires": "Thu, 16 Apr 2026 02:40:17 GMT",
+        "Cache-Control": "no-cache=\"Set-Cookie\", max-age=60, public, s-maxage=60, stale-while-revalidate, stale-if-error",
+        "Pragma": "no-cache",
+        "X-IPS-LoggedIn": "0",
+        "Vary": "Cookie",
+        "Content-Length": "6663",
+        "X-XSS-Protection": "0",
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "X-Frame-Options": "sameorigin",
+        "Content-Security-Policy": "frame-ancestors 'self'",
+        "X-Content-Security-Policy": "frame-ancestors 'self'",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Last-Modified": "Thu, 16 Apr 2026 02:39:17 GMT",
+        "Connection": "close",
+        "Content-Type": "application\/json;charset=UTF-8"
+    },
+    "data": "{\"page\":1,\"perPage\":25,\"totalResults\":11,\"totalPages\":1,\"results\":[{\"id\":1,\"name\":\"A Test Category\",\"path\":\"A Test Category\",\"type\":\"category\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/1-a-test-category\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":1,\"perm_view\":\"*\",\"perm_2\":\"*\",\"perm_3\":\"3,4,6\",\"perm_4\":\"3,4,6\",\"perm_5\":\"3,4,6\",\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":2,\"name\":\"A Test Forum\",\"path\":\"A Test Category > A Test Forum\",\"type\":\"discussions\",\"topics\":5,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/2-a-test-forum\\\/\",\"parentId\":1,\"permissions\":{\"perm_id\":2,\"perm_view\":\"*\",\"perm_2\":\"*\",\"perm_3\":\"3,4,6\",\"perm_4\":\"3,4,6\",\"perm_5\":\"3,4,6\",\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":12,\"name\":\"Foo\",\"path\":\"Foo\",\"type\":\"discussions\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/12-foo\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":59,\"perm_view\":\"*\",\"perm_2\":\"*\",\"perm_3\":\"4\",\"perm_4\":\"4\",\"perm_5\":\"4\",\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":13,\"name\":\"Foo\",\"path\":\"Foo\",\"type\":\"discussions\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/13-foo\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":60,\"perm_view\":\"*\",\"perm_2\":\"*\",\"perm_3\":\"4\",\"perm_4\":\"4\",\"perm_5\":\"4\",\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":14,\"name\":\"Baz\",\"path\":\"Baz\",\"type\":\"discussions\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/14-baz\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":61,\"perm_view\":\"*\",\"perm_2\":\"*\",\"perm_3\":\"4\",\"perm_4\":\"4\",\"perm_5\":\"4\",\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":16,\"name\":\"Baz\",\"path\":\"Baz\",\"type\":\"discussions\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/16-baz\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":62,\"perm_view\":\"\",\"perm_2\":null,\"perm_3\":null,\"perm_4\":null,\"perm_5\":null,\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":17,\"name\":\"Testing with form body\",\"path\":\"Testing with form body\",\"type\":\"category\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/17-testing-with-form-body\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":63,\"perm_view\":\"\",\"perm_2\":null,\"perm_3\":null,\"perm_4\":null,\"perm_5\":null,\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":18,\"name\":\"Test Category\",\"path\":\"Test Category\",\"type\":\"category\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/18-test-category\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":64,\"perm_view\":\"\",\"perm_2\":null,\"perm_3\":null,\"perm_4\":null,\"perm_5\":null,\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":19,\"name\":\"Test Category\",\"path\":\"Test Category > Test Category\",\"type\":\"discussions\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/19-test-category\\\/\",\"parentId\":18,\"permissions\":{\"perm_id\":65,\"perm_view\":\"\",\"perm_2\":null,\"perm_3\":null,\"perm_4\":null,\"perm_5\":null,\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":20,\"name\":\"Testing Forum\",\"path\":\"Testing Forum\",\"type\":\"category\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/20-testing-forum\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":66,\"perm_view\":\"\",\"perm_2\":null,\"perm_3\":null,\"perm_4\":null,\"perm_5\":null,\"perm_6\":null,\"perm_7\":null},\"club\":0},{\"id\":21,\"name\":\"::title::\",\"path\":\"::title::\",\"type\":\"category\",\"topics\":0,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/21-title\\\/\",\"parentId\":-1,\"permissions\":{\"perm_id\":67,\"perm_view\":\"\",\"perm_2\":null,\"perm_3\":null,\"perm_4\":null,\"perm_5\":null,\"perm_6\":null,\"perm_7\":null},\"club\":0}]}",
+    "context": []
+}

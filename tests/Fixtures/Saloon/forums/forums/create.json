@@ -1,0 +1,24 @@
+{
+    "statusCode": 201,
+    "headers": {
+        "Date": "Thu, 16 Apr 2026 02:41:27 GMT",
+        "Server": "Apache\/2.4.58 (Ubuntu)",
+        "Set-Cookie": "REDACTED",
+        "Expires": "0",
+        "Cache-Control": "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0",
+        "Pragma": "no-cache",
+        "X-IPS-LoggedIn": "0",
+        "Vary": "Cookie",
+        "Content-Length": "426",
+        "X-XSS-Protection": "0",
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "X-Frame-Options": "sameorigin",
+        "Content-Security-Policy": "frame-ancestors 'self'",
+        "X-Content-Security-Policy": "frame-ancestors 'self'",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Connection": "close",
+        "Content-Type": "application\/json;charset=UTF-8"
+    },
+    "data": "{\n    \"id\": 22,\n    \"name\": \"::title::\",\n    \"path\": \"::title::\",\n    \"type\": \"category\",\n    \"topics\": null,\n    \"url\": \"http:\\\/\\\/localhost:8080\\\/ic4\\\/forum\\\/22-title\\\/\",\n    \"parentId\": -1,\n    \"permissions\": {\n        \"perm_id\": 68,\n        \"perm_view\": \"\",\n        \"perm_2\": null,\n        \"perm_3\": null,\n        \"perm_4\": null,\n        \"perm_5\": null,\n        \"perm_6\": null,\n        \"perm_7\": null\n    },\n    \"club\": 0\n}",
+    "context": []
+}

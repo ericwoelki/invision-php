@@ -17,6 +17,11 @@ use Saloon\Http\BaseResource;
 
 final class TopicResource extends BaseResource
 {
+    public function posts(): TopicPostResource
+    {
+        return new TopicPostResource($this->connector);
+    }
+
     /** @return array<int, Topic> */
     public function list(?ListTopicsPayload $payload = null): array
     {

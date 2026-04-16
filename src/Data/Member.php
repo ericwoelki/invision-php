@@ -15,8 +15,8 @@ use Carbon\CarbonImmutable;
  *  primaryGroup: GroupData, secondaryGroups: list<GroupData>,
  *  email: string, joined: string, registrationIpAddress: string,  warningPoints: int, reputationPoints: int, photoUrl: string,
  *  photoUrlIsDefault: bool, coverPhotoUrl: string, profileUrl: string|null, validating: bool, posts: int,
- *  lastActivity: string|null, lastVisit: string|null, lastPost: string|null, profileViews: int, birthday: string|null,
- *  customFields: list<FieldGroupData>, rank: RankData|null, achievements_points: int, allowAdminEmails: bool, completed: bool}
+ *  lastActivity: string|null, lastVisit: string|null, lastPost: string|null, profileViews: int|null, birthday: string|null,
+ *  customFields: list<FieldGroupData>, rank: RankData|null, achievements_points: int|null, allowAdminEmails: bool, completed: bool}
  */
 final readonly class Member
 {
@@ -80,11 +80,11 @@ final readonly class Member
             lastActivity: $data['lastActivity'] ? CarbonImmutable::parse($data['lastActivity']) : null,
             lastVisit: $data['lastVisit'] ? CarbonImmutable::parse($data['lastVisit']) : null,
             lastPost: $data['lastPost'] ? CarbonImmutable::parse($data['lastPost']) : null,
-            profileViews: $data['profileViews'],
+            profileViews: $data['profileViews'] ?? 0,
             birthday: $data['birthday'],
             customFields: array_map(FieldGroup::fromArray(...), $data['customFields']),
             rank: $data['rank'] ? Rank::fromArray($data['rank']) : null,
-            achievementsPoints: $data['achievements_points'],
+            achievementsPoints: $data['achievements_points'] ?? 0,
             allowAdminEmails: $data['allowAdminEmails'],
             registrationCompleted: $data['completed'],
         );

@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace EricWoelki\Invision\Applications\Forums;
 
 use EricWoelki\Invision\Applications\Forums\Payloads\CreateForumPayload;
+use EricWoelki\Invision\Applications\Forums\Payloads\DeleteForumPayload;
 use EricWoelki\Invision\Applications\Forums\Payloads\ListForumsPayload;
 use EricWoelki\Invision\Applications\Forums\Payloads\UpdateForumPayload;
 use EricWoelki\Invision\Applications\Forums\Requests\CreateForumRequest;
+use EricWoelki\Invision\Applications\Forums\Requests\DeleteForumRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\GetForumRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\ListForumsRequest;
 use EricWoelki\Invision\Applications\Forums\Requests\UpdateForumRequest;
@@ -43,5 +45,10 @@ final class ForumResource extends BaseResource
         $request = new UpdateForumRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(DeleteForumPayload $payload): void
+    {
+        $this->connector->send(new DeleteForumRequest($payload));
     }
 }

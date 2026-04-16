@@ -17,7 +17,7 @@ use Saloon\Http\BaseResource;
 final class MemberResource extends BaseResource
 {
     /** @return array<int, Member> */
-    public function list(?ListMembersPayload $payload): array
+    public function list(?ListMembersPayload $payload = null): array
     {
         $request = new ListMembersRequest($payload);
 

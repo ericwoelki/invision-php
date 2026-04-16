@@ -14,7 +14,7 @@ use Saloon\Http\BaseResource;
 final class GroupResource extends BaseResource
 {
     /** @return array<int, Group> */
-    public function list(?ListGroupsPayload $payload): array
+    public function list(?ListGroupsPayload $payload = null): array
     {
         $request = new ListGroupsRequest($payload);
 

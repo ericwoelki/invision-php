@@ -17,6 +17,11 @@ use Saloon\Http\BaseResource;
 
 final class PostResource extends BaseResource
 {
+    public function reactions(): PostReactionResource
+    {
+        return new PostReactionResource($this->connector);
+    }
+
     /** @return array<int, Post> */
     public function list(?ListPostsPayload $payload = null): array
     {

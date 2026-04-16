@@ -11,6 +11,11 @@ use Saloon\Http\BaseResource;
 
 final class MessageResource extends BaseResource
 {
+    public function replies(): MessageReplyResource
+    {
+        return new MessageReplyResource($this->connector);
+    }
+
     public function create(CreateMessagePayload $payload): void
     {
         $request = new CreateMessageRequest($payload);

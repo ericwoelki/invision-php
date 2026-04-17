@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\Pages;
 
+use EricWoelki\Invision\Applications\Pages\Payloads\CreateRecordPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListRecordsPayload;
+use EricWoelki\Invision\Applications\Pages\Requests\CreateRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListRecordsRequest;
 use EricWoelki\Invision\Data\Record;
@@ -23,6 +25,13 @@ final class RecordsResource extends BaseResource
     public function get(int $databaseId, int $recordId): Record
     {
         $request = new GetRecordRequest($databaseId, $recordId);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function create(CreateRecordPayload $payload): Record
+    {
+        $request = new CreateRecordRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

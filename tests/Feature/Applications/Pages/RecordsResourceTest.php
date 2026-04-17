@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Pages\Payloads\CreateRecordPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListRecordsPayload;
+use EricWoelki\Invision\Applications\Pages\Requests\CreateRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListRecordsRequest;
 use EricWoelki\Invision\Data\Record;
@@ -33,6 +35,24 @@ it('gets a record', function (): void {
     ]);
 
     $record = $this->invision->pages()->records()->get(databaseId: 1, recordId: 1);
+
+    expect($record)->toBeInstanceOf(Record::class);
+});
+
+it('creates a record', function (): void {
+    MockClient::global([
+        CreateRecordRequest::class => new InvisionFixture('pages/records/create'),
+    ]);
+
+    $record = $this->invision->pages()->records()->create(new CreateRecordPayload(
+        databaseId: 1,
+        categoryId: 1,
+        authorId: 1,
+        fields: [
+            1 => '::title::',
+            2 => '::content::',
+        ]
+    ));
 
     expect($record)->toBeInstanceOf(Record::class);
 });

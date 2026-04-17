@@ -1,0 +1,25 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Fri, 17 Apr 2026 03:55:10 GMT",
+        "Server": "Apache\/2.4.58 (Ubuntu)",
+        "Set-Cookie": "REDACTED",
+        "Expires": "Fri, 17 Apr 2026 03:56:10 GMT",
+        "Cache-Control": "no-cache=\"Set-Cookie\", max-age=60, public, s-maxage=60, stale-while-revalidate, stale-if-error",
+        "Pragma": "no-cache",
+        "X-IPS-LoggedIn": "0",
+        "Vary": "Cookie",
+        "Content-Length": "807",
+        "X-XSS-Protection": "0",
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "X-Frame-Options": "sameorigin",
+        "Content-Security-Policy": "frame-ancestors 'self'",
+        "X-Content-Security-Policy": "frame-ancestors 'self'",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Last-Modified": "Fri, 17 Apr 2026 03:55:10 GMT",
+        "Connection": "close",
+        "Content-Type": "application\/json;charset=UTF-8"
+    },
+    "data": "{\"id\":1,\"name\":\"Articles\",\"useCategories\":true,\"fields\":[{\"id\":1,\"title\":\"Title\",\"description\":null,\"type\":\"Text\",\"default\":null,\"required\":true,\"options\":null},{\"id\":2,\"title\":\"Content\",\"description\":null,\"type\":\"Editor\",\"default\":null,\"required\":true,\"options\":null}],\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/articles.html\\\/\",\"permissions\":{\"perm_id\":54,\"perm_view\":\"*\",\"perm_2\":\"*\",\"perm_3\":\"4\",\"perm_4\":\"4\",\"perm_5\":\"4\",\"perm_6\":\"4\",\"perm_7\":null}}",
+    "context": []
+}

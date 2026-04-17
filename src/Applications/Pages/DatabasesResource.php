@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\Pages;
 
+use EricWoelki\Invision\Applications\Pages\Requests\GetDatabaseRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListDatabasesRequest;
 use EricWoelki\Invision\Data\Database;
 use Saloon\Http\BaseResource;
@@ -14,6 +15,13 @@ final class DatabasesResource extends BaseResource
     public function list(): array
     {
         $request = new ListDatabasesRequest;
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function get(int $id): Database
+    {
+        $request = new GetDatabaseRequest($id);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

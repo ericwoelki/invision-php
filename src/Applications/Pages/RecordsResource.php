@@ -6,9 +6,11 @@ namespace EricWoelki\Invision\Applications\Pages;
 
 use EricWoelki\Invision\Applications\Pages\Payloads\CreateRecordPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListRecordsPayload;
+use EricWoelki\Invision\Applications\Pages\Payloads\UpdateRecordPayload;
 use EricWoelki\Invision\Applications\Pages\Requests\CreateRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListRecordsRequest;
+use EricWoelki\Invision\Applications\Pages\Requests\UpdateRecordRequest;
 use EricWoelki\Invision\Data\Record;
 use Saloon\Http\BaseResource;
 
@@ -32,6 +34,13 @@ final class RecordsResource extends BaseResource
     public function create(CreateRecordPayload $payload): Record
     {
         $request = new CreateRecordRequest($payload);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function update(UpdateRecordPayload $payload): Record
+    {
+        $request = new UpdateRecordRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

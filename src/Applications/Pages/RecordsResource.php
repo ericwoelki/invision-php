@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Pages\Payloads\CreateRecordPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListRecordsPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\UpdateRecordPayload;
 use EricWoelki\Invision\Applications\Pages\Requests\CreateRecordRequest;
+use EricWoelki\Invision\Applications\Pages\Requests\DeleteRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListRecordsRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\UpdateRecordRequest;
@@ -43,5 +44,10 @@ final class RecordsResource extends BaseResource
         $request = new UpdateRecordRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $databaseId, int $recordId): void
+    {
+        $this->connector->send(new DeleteRecordRequest($databaseId, $recordId));
     }
 }

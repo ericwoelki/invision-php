@@ -6,11 +6,13 @@ use EricWoelki\Invision\Applications\Pages\Payloads\CreateRecordPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListRecordsPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\UpdateRecordPayload;
 use EricWoelki\Invision\Applications\Pages\Requests\CreateRecordRequest;
+use EricWoelki\Invision\Applications\Pages\Requests\DeleteRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListRecordsRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\UpdateRecordRequest;
 use EricWoelki\Invision\Data\Record;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -77,4 +79,14 @@ it('updates a record', function (): void {
     expect($record)
         ->toBeInstanceOf(Record::class)
         ->and($record->title)->toBe('::edited::');
+});
+
+it('deletes a record', function (): void {
+    $mock = MockClient::global([
+        DeleteRecordRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->pages()->records()->delete(databaseId: 1, recordId: 2);
+
+    $mock->assertSent(DeleteRecordRequest::class);
 });

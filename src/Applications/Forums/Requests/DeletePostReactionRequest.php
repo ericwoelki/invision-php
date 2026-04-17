@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace EricWoelki\Invision\Applications\Forums\Requests;
 
 use EricWoelki\Invision\Applications\Forums\Payloads\DeletePostReactionPayload;
-use EricWoelki\Invision\Data\ReactedComment;
+use EricWoelki\Invision\Data\Comment;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
-/** @phpstan-import-type ReactedCommentData from ReactedComment */
+/** @phpstan-import-type CommentData from Comment */
 final class DeletePostReactionRequest extends Request
 {
     protected Method $method = Method::DELETE;
@@ -24,12 +24,12 @@ final class DeletePostReactionRequest extends Request
         return "forums/posts/{$this->payload->postId}/react";
     }
 
-    public function createDtoFromResponse(Response $response): ReactedComment
+    public function createDtoFromResponse(Response $response): Comment
     {
-        /** @var ReactedCommentData $data */
+        /** @var CommentData $data */
         $data = $response->json();
 
-        return ReactedComment::fromArray($data);
+        return Comment::fromArray($data);
     }
 
     protected function defaultQuery(): array

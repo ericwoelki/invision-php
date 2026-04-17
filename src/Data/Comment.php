@@ -10,9 +10,9 @@ use Carbon\CarbonImmutable;
  * @phpstan-import-type MemberData from Member
  * @phpstan-import-type ReactionData from Reaction
  *
- * @phpstan-type ReactedCommentData array{id: int, item_id: int, author: MemberData, date: string, content: string, hidden: bool, url: string, reactions: array<int, list<ReactionData>>}
+ * @phpstan-type CommentData array{id: int, item_id: int, author: MemberData, date: string, content: string, hidden: bool, url: string, reactions: array<int, list<ReactionData>>}
  */
-final readonly class ReactedComment
+final readonly class Comment
 {
     /** @param array<int, list<Reaction>> $reactions */
     public function __construct(
@@ -26,8 +26,8 @@ final readonly class ReactedComment
         public array $reactions,
     ) {}
 
-    /** @param ReactedCommentData $data */
-    public static function fromArray(array $data): ReactedComment
+    /** @param CommentData $data */
+    public static function fromArray(array $data): Comment
     {
         return new self(
             id: $data['id'],

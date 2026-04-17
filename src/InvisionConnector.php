@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EricWoelki\Invision;
 
 use EricWoelki\Invision\Applications\ForumsApplication;
+use EricWoelki\Invision\Applications\PagesApplication;
 use EricWoelki\Invision\Applications\SystemApplication;
 use Saloon\Http\Auth\BasicAuthenticator;
 use Saloon\Http\Connector;
@@ -39,6 +40,11 @@ final class InvisionConnector extends Connector implements HasPagination
     public function forums(): ForumsApplication
     {
         return new ForumsApplication($this);
+    }
+
+    public function pages(): PagesApplication
+    {
+        return new PagesApplication($this);
     }
 
     protected function defaultAuth(): BasicAuthenticator

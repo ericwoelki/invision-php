@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EricWoelki\Invision\Applications\Pages;
 
 use EricWoelki\Invision\Applications\Pages\Payloads\ListRecordsPayload;
+use EricWoelki\Invision\Applications\Pages\Requests\GetRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListRecordsRequest;
 use EricWoelki\Invision\Data\Record;
 use Saloon\Http\BaseResource;
@@ -15,6 +16,13 @@ final class RecordsResource extends BaseResource
     public function list(ListRecordsPayload $payload): array
     {
         $request = new ListRecordsRequest($payload);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function get(int $databaseId, int $recordId): Record
+    {
+        $request = new GetRecordRequest($databaseId, $recordId);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

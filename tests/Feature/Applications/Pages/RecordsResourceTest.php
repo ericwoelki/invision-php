@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Pages\Payloads\ListRecordsPayload;
+use EricWoelki\Invision\Applications\Pages\Requests\GetRecordRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListRecordsRequest;
 use EricWoelki\Invision\Data\Record;
 use Saloon\Http\Faking\MockClient;
@@ -24,4 +25,14 @@ it('lists records', function (): void {
     expect($records)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Record::class);
+});
+
+it('gets a record', function (): void {
+    MockClient::global([
+        GetRecordRequest::class => new InvisionFixture('pages/records/get'),
+    ]);
+
+    $record = $this->invision->pages()->records()->get(databaseId: 1, recordId: 1);
+
+    expect($record)->toBeInstanceOf(Record::class);
 });

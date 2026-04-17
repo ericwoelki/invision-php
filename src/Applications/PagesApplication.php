@@ -6,6 +6,7 @@ namespace EricWoelki\Invision\Applications;
 
 use EricWoelki\Invision\Applications\Pages\CategoriesResource;
 use EricWoelki\Invision\Applications\Pages\DatabasesResource;
+use EricWoelki\Invision\Applications\Pages\RecordsResource;
 use Saloon\Http\BaseResource;
 
 final class PagesApplication extends BaseResource
@@ -18,5 +19,10 @@ final class PagesApplication extends BaseResource
     public function categories(): CategoriesResource
     {
         return new CategoriesResource($this->connector);
+    }
+
+    public function records(): RecordsResource
+    {
+        return new RecordsResource($this->connector);
     }
 }

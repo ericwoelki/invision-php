@@ -11,7 +11,7 @@ use EricWoelki\Invision\Applications\System\Requests\ListGroupsRequest;
 use EricWoelki\Invision\Data\Group;
 use Saloon\Http\BaseResource;
 
-final class GroupResource extends BaseResource
+final class GroupsResource extends BaseResource
 {
     /** @return array<int, Group> */
     public function list(?ListGroupsPayload $payload = null): array

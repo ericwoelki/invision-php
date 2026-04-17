@@ -9,7 +9,7 @@ use EricWoelki\Invision\Applications\Forums\Requests\ListTopicPostsRequest;
 use EricWoelki\Invision\Data\Post;
 use Saloon\Http\BaseResource;
 
-final class TopicPostResource extends BaseResource
+final class TopicPostsResource extends BaseResource
 {
     /** @return array<int, Post> */
     public function list(ListTopicPostsPayload $payload): array

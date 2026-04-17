@@ -15,11 +15,11 @@ use EricWoelki\Invision\Applications\Forums\Requests\UpdateTopicRequest;
 use EricWoelki\Invision\Data\Topic;
 use Saloon\Http\BaseResource;
 
-final class TopicResource extends BaseResource
+final class TopicsResource extends BaseResource
 {
-    public function posts(): TopicPostResource
+    public function posts(): TopicPostsResource
     {
-        return new TopicPostResource($this->connector);
+        return new TopicPostsResource($this->connector);
     }
 
     /** @return array<int, Topic> */

@@ -9,11 +9,11 @@ use EricWoelki\Invision\Applications\System\Requests\CreateMessageRequest;
 use EricWoelki\Invision\Applications\System\Requests\DeleteMessageRequest;
 use Saloon\Http\BaseResource;
 
-final class MessageResource extends BaseResource
+final class MessagesResource extends BaseResource
 {
-    public function replies(): MessageReplyResource
+    public function replies(): MessageRepliesResource
     {
-        return new MessageReplyResource($this->connector);
+        return new MessageRepliesResource($this->connector);
     }
 
     public function create(CreateMessagePayload $payload): void

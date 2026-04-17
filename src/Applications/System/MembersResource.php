@@ -14,7 +14,7 @@ use EricWoelki\Invision\Applications\System\Requests\UpdateMemberRequest;
 use EricWoelki\Invision\Data\Member;
 use Saloon\Http\BaseResource;
 
-final class MemberResource extends BaseResource
+final class MembersResource extends BaseResource
 {
     /** @return array<int, Member> */
     public function list(?ListMembersPayload $payload = null): array

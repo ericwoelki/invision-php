@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications;
 
-use EricWoelki\Invision\Applications\System\GroupResource;
-use EricWoelki\Invision\Applications\System\MemberResource;
-use EricWoelki\Invision\Applications\System\MessageResource;
+use EricWoelki\Invision\Applications\System\GroupsResource;
+use EricWoelki\Invision\Applications\System\MembersResource;
+use EricWoelki\Invision\Applications\System\MessagesResource;
 use Saloon\Http\BaseResource;
 
 final class SystemApplication extends BaseResource
 {
-    public function groups(): GroupResource
+    public function groups(): GroupsResource
     {
-        return new GroupResource($this->connector);
+        return new GroupsResource($this->connector);
     }
 
-    public function members(): MemberResource
+    public function members(): MembersResource
     {
-        return new MemberResource($this->connector);
+        return new MembersResource($this->connector);
     }
 
-    public function messages(): MessageResource
+    public function messages(): MessagesResource
     {
-        return new MessageResource($this->connector);
+        return new MessagesResource($this->connector);
     }
 }

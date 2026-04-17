@@ -15,11 +15,11 @@ use EricWoelki\Invision\Applications\Forums\Requests\UpdatePostRequest;
 use EricWoelki\Invision\Data\Post;
 use Saloon\Http\BaseResource;
 
-final class PostResource extends BaseResource
+final class PostsResource extends BaseResource
 {
-    public function reactions(): PostReactionResource
+    public function reactions(): PostReactionsResource
     {
-        return new PostReactionResource($this->connector);
+        return new PostReactionsResource($this->connector);
     }
 
     /** @return array<int, Post> */

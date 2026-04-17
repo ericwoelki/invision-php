@@ -11,7 +11,7 @@ use EricWoelki\Invision\Applications\Forums\Requests\DeletePostReactionRequest;
 use EricWoelki\Invision\Data\ReactedComment;
 use Saloon\Http\BaseResource;
 
-final class PostReactionResource extends BaseResource
+final class PostReactionsResource extends BaseResource
 {
     public function create(CreatePostReactionPayload $payload): ReactedComment
     {

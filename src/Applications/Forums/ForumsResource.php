@@ -16,7 +16,7 @@ use EricWoelki\Invision\Applications\Forums\Requests\UpdateForumRequest;
 use EricWoelki\Invision\Data\Forum;
 use Saloon\Http\BaseResource;
 
-final class ForumResource extends BaseResource
+final class ForumsResource extends BaseResource
 {
     /** @return array<int, Forum> */
     public function list(?ListForumsPayload $payload = null): array

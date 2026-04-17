@@ -8,7 +8,7 @@ use EricWoelki\Invision\Applications\System\Payloads\CreateMessageReplyPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateMessageReplyRequest;
 use Saloon\Http\BaseResource;
 
-final class MessageReplyResource extends BaseResource
+final class MessageRepliesResource extends BaseResource
 {
     public function create(CreateMessageReplyPayload $payload): void
     {

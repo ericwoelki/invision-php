@@ -17,6 +17,11 @@ use Saloon\Http\BaseResource;
 
 final class RecordsResource extends BaseResource
 {
+    public function comments(): RecordCommentsResource
+    {
+        return new RecordCommentsResource($this->connector);
+    }
+
     /** @return array<int, Record> */
     public function list(ListRecordsPayload $payload): array
     {

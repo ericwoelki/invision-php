@@ -17,14 +17,19 @@ use Saloon\Http\BaseResource;
 
 final class RecordsResource extends BaseResource
 {
+    public function comments(): RecordCommentsResource
+    {
+        return new RecordCommentsResource($this->connector);
+    }
+
     public function reactions(): RecordReactionsResource
     {
         return new RecordReactionsResource($this->connector);
     }
 
-    public function comments(): RecordCommentsResource
+    public function reviews(): RecordReviewsResource
     {
-        return new RecordCommentsResource($this->connector);
+        return new RecordReviewsResource($this->connector);
     }
 
     /** @return array<int, Record> */

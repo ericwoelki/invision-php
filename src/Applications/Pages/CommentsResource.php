@@ -17,6 +17,11 @@ use Saloon\Http\BaseResource;
 
 final class CommentsResource extends BaseResource
 {
+    public function reactions(): CommentReactionsResource
+    {
+        return new CommentReactionsResource($this->connector);
+    }
+
     /** @return array<int, Comment> */
     public function list(ListCommentsPayload $payload): array
     {

@@ -5,9 +5,11 @@ declare(strict_types=1);
 use EricWoelki\Invision\Applications\System\Payloads\CreateMemberFollowPayload;
 use EricWoelki\Invision\Applications\System\Payloads\ListMemberFollowsPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateMemberFollowRequest;
+use EricWoelki\Invision\Applications\System\Requests\DeleteMemberFollowRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListMemberFollowsRequest;
 use EricWoelki\Invision\Data\Follow;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -39,4 +41,14 @@ it('creates a member follow', function (): void {
     ));
 
     expect($follow)->toBeInstanceOf(Follow::class);
+});
+
+it('deletes a member follow', function (): void {
+    $mock = MockClient::global([
+        DeleteMemberFollowRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->system()->members()->follows()->delete(memberId: 1, followId: '::follow::');
+
+    $mock->assertSent(DeleteMemberFollowRequest::class);
 });

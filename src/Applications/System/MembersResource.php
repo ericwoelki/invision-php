@@ -16,6 +16,11 @@ use Saloon\Http\BaseResource;
 
 final class MembersResource extends BaseResource
 {
+    public function follows(): MemberFollowsResource
+    {
+        return new MemberFollowsResource($this->connector);
+    }
+
     /** @return array<int, Member> */
     public function list(?ListMembersPayload $payload = null): array
     {

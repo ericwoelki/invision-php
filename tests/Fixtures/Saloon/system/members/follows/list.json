@@ -1,0 +1,25 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Sat, 18 Apr 2026 08:16:46 GMT",
+        "Server": "Apache\/2.4.58 (Ubuntu)",
+        "Set-Cookie": "REDACTED",
+        "Expires": "Sat, 18 Apr 2026 08:17:46 GMT",
+        "Cache-Control": "no-cache=\"Set-Cookie\", max-age=60, public, s-maxage=60, stale-while-revalidate, stale-if-error",
+        "Pragma": "no-cache",
+        "X-IPS-LoggedIn": "0",
+        "Vary": "Cookie",
+        "Content-Length": "534",
+        "X-XSS-Protection": "0",
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "X-Frame-Options": "sameorigin",
+        "Content-Security-Policy": "frame-ancestors 'self'",
+        "X-Content-Security-Policy": "frame-ancestors 'self'",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Last-Modified": "Sat, 18 Apr 2026 08:16:46 GMT",
+        "Connection": "close",
+        "Content-Type": "application\/json;charset=UTF-8"
+    },
+    "data": "{\"page\":1,\"perPage\":25,\"totalResults\":1,\"totalPages\":1,\"results\":[{\"followKey\":\"f11f8d4f0aa71c75b5291142a0468227\",\"followApp\":\"forums\",\"followArea\":\"topic\",\"followId\":1,\"followAnon\":false,\"followNotify\":true,\"followType\":\"immediate\",\"followSent\":null,\"followName\":\"Welcome!\",\"followUrl\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/topic\\\/1-welcome\\\/\"}]}",
+    "context": []
+}

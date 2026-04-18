@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Pages\CategoriesResource;
 use EricWoelki\Invision\Applications\Pages\CommentsResource;
 use EricWoelki\Invision\Applications\Pages\DatabasesResource;
 use EricWoelki\Invision\Applications\Pages\RecordsResource;
+use EricWoelki\Invision\Applications\Pages\ReviewsResource;
 use Saloon\Http\BaseResource;
 
 final class PagesApplication extends BaseResource
@@ -30,5 +31,10 @@ final class PagesApplication extends BaseResource
     public function comments(): CommentsResource
     {
         return new CommentsResource($this->connector);
+    }
+
+    public function reviews(): ReviewsResource
+    {
+        return new ReviewsResource($this->connector);
     }
 }

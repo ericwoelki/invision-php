@@ -36,6 +36,7 @@ final class CreateCommentReactionRequest extends Request implements HasBody
         return Comment::fromArray($data);
     }
 
+    /** @return array<string, mixed> */
     protected function defaultBody(): array
     {
         return $this->payload->toArray();

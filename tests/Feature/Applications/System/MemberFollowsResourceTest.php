@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\System\Payloads\CreateMemberFollowPayload;
 use EricWoelki\Invision\Applications\System\Payloads\ListMemberFollowsPayload;
+use EricWoelki\Invision\Applications\System\Requests\CreateMemberFollowRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListMemberFollowsRequest;
 use EricWoelki\Invision\Data\Follow;
 use Saloon\Http\Faking\MockClient;
@@ -22,4 +24,19 @@ it('lists member follows', function (): void {
     expect($follows)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Follow::class);
+});
+
+it('creates a member follow', function (): void {
+    MockClient::global([
+        CreateMemberFollowRequest::class => new InvisionFixture('system/members/follows/create'),
+    ]);
+
+    $follow = $this->invision->system()->members()->follows()->create(new CreateMemberFollowPayload(
+        memberId: 1,
+        application: 'forums',
+        area: 'topic',
+        itemId: 1,
+    ));
+
+    expect($follow)->toBeInstanceOf(Follow::class);
 });

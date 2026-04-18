@@ -33,7 +33,7 @@ final readonly class Follow
             key: $data['followKey'],
             application: $data['followApp'],
             area: $data['followArea'],
-            itemId: $data['followId'],
+            itemId: (int) $data['followId'],
             anonymous: $data['followAnon'],
             notify: $data['followNotify'],
             type: $data['followType'] !== null ? FollowType::from($data['followType']) : null,

@@ -6,9 +6,11 @@ namespace EricWoelki\Invision\Applications\Pages;
 
 use EricWoelki\Invision\Applications\Pages\Payloads\CreateReviewPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListReviewsPayload;
+use EricWoelki\Invision\Applications\Pages\Payloads\UpdateReviewPayload;
 use EricWoelki\Invision\Applications\Pages\Requests\CreateReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListReviewsRequest;
+use EricWoelki\Invision\Applications\Pages\Requests\UpdateReviewRequest;
 use EricWoelki\Invision\Data\Review;
 use Saloon\Http\BaseResource;
 
@@ -32,6 +34,13 @@ final class ReviewsResource extends BaseResource
     public function create(CreateReviewPayload $payload): Review
     {
         $request = new CreateReviewRequest($payload);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function update(UpdateReviewPayload $payload): Review
+    {
+        $request = new UpdateReviewRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

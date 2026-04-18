@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Pages\Payloads\CreateReviewPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListReviewsPayload;
+use EricWoelki\Invision\Applications\Pages\Payloads\UpdateReviewPayload;
 use EricWoelki\Invision\Applications\Pages\Requests\CreateReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListReviewsRequest;
+use EricWoelki\Invision\Applications\Pages\Requests\UpdateReviewRequest;
 use EricWoelki\Invision\Data\Review;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -53,4 +55,20 @@ it('creates a review', function (): void {
     expect($review)
         ->toBeInstanceOf(Review::class)
         ->and($review->rating)->toBe(4);
+});
+
+it('updates a review', function (): void {
+    MockClient::global([
+        UpdateReviewRequest::class => new InvisionFixture('pages/reviews/update'),
+    ]);
+
+    $review = $this->invision->pages()->reviews()->update(new UpdateReviewPayload(
+        databaseId: 1,
+        reviewId: 1,
+        content: '::edited::',
+    ));
+
+    expect($review)
+        ->toBeInstanceOf(Review::class)
+        ->and($review->content)->toBe('::edited::');
 });

@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Pages\Payloads\CreateCommentReactionPayload;
+use EricWoelki\Invision\Applications\Pages\Payloads\DeleteCommentReactionPayload;
 use EricWoelki\Invision\Applications\Pages\Requests\CreateCommentReactionRequest;
+use EricWoelki\Invision\Applications\Pages\Requests\DeleteCommentReactionRequest;
 use EricWoelki\Invision\Data\Comment;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -22,6 +24,20 @@ it('creates a comment reaction', function (): void {
         commentId: 2,
         memberId: 1,
         reactionId: 1,
+    ));
+
+    expect($comment)->toBeInstanceOf(Comment::class);
+});
+
+it('deletes a comment reaction', function (): void {
+    MockClient::global([
+        DeleteCommentReactionRequest::class => new InvisionFixture('pages/comments/reactions/delete'),
+    ]);
+
+    $comment = $this->invision->pages()->comments()->reactions()->delete(new DeleteCommentReactionPayload(
+        databaseId: 1,
+        commentId: 2,
+        memberId: 1,
     ));
 
     expect($comment)->toBeInstanceOf(Comment::class);

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Pages\Payloads\ListReviewsPayload;
+use EricWoelki\Invision\Applications\Pages\Requests\GetReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListReviewsRequest;
 use EricWoelki\Invision\Data\Review;
 use Saloon\Http\Faking\MockClient;
@@ -22,4 +23,14 @@ it('lists reviews', function (): void {
     expect($reviews)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Review::class);
+});
+
+it('gets a review', function (): void {
+    MockClient::global([
+        GetReviewRequest::class => new InvisionFixture('pages/reviews/get'),
+    ]);
+
+    $review = $this->invision->pages()->reviews()->get(databaseId: 1, reviewId: 1);
+
+    expect($review)->toBeInstanceOf(Review::class);
 });

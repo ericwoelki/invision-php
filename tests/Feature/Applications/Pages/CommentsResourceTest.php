@@ -6,11 +6,13 @@ use EricWoelki\Invision\Applications\Pages\Payloads\CreateCommentPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListCommentsPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\UpdateCommentPayload;
 use EricWoelki\Invision\Applications\Pages\Requests\CreateCommentRequest;
+use EricWoelki\Invision\Applications\Pages\Requests\DeleteCommentRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetCommentRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListCommentsRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\UpdateCommentRequest;
 use EricWoelki\Invision\Data\Comment;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -72,4 +74,14 @@ it('updates a comment', function (): void {
     expect($comment)
         ->toBeInstanceOf(Comment::class)
         ->and($comment->content)->toBe('::edited::');
+});
+
+it('deletes a comment', function (): void {
+    $mock = MockClient::global([
+        DeleteCommentRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->pages()->comments()->delete(databaseId: 1, commentId: 1);
+
+    $mock->assertSent(DeleteCommentRequest::class);
 });

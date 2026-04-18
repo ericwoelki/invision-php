@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Pages\Payloads\CreateReviewPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListReviewsPayload;
+use EricWoelki\Invision\Applications\Pages\Requests\CreateReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListReviewsRequest;
 use EricWoelki\Invision\Data\Review;
@@ -33,4 +35,22 @@ it('gets a review', function (): void {
     $review = $this->invision->pages()->reviews()->get(databaseId: 1, reviewId: 1);
 
     expect($review)->toBeInstanceOf(Review::class);
+});
+
+it('creates a review', function (): void {
+    MockClient::global([
+        CreateReviewRequest::class => new InvisionFixture('pages/reviews/create'),
+    ]);
+
+    $review = $this->invision->pages()->reviews()->create(new CreateReviewPayload(
+        databaseId: 1,
+        recordId: 1,
+        authorId: 2,
+        content: '::content::',
+        rating: 4,
+    ));
+
+    expect($review)
+        ->toBeInstanceOf(Review::class)
+        ->and($review->rating)->toBe(4);
 });

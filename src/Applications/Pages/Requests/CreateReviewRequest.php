@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+namespace EricWoelki\Invision\Applications\Pages\Requests;
+
+use EricWoelki\Invision\Applications\Pages\Payloads\CreateReviewPayload;
+use EricWoelki\Invision\Data\Review;
+use Saloon\Contracts\Body\HasBody;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Http\Response;
+use Saloon\Traits\Body\HasFormBody;
+
+/** @phpstan-import-type ReviewData from Review */
+final class CreateReviewRequest extends Request implements HasBody
+{
+    use HasFormBody;
+
+    protected Method $method = Method::POST;
+
+    public function __construct(
+        private readonly CreateReviewPayload $payload,
+    ) {}
+
+    public function resolveEndpoint(): string
+    {
+        return 'cms/reviews/'.$this->payload->databaseId;
+    }
+
+    public function createDtoFromResponse(Response $response): Review
+    {
+        /** @var ReviewData $data */
+        $data = $response->json();
+
+        return Review::fromArray($data);
+    }
+
+    /** @return array<string, mixed> */
+    protected function defaultBody(): array
+    {
+        return $this->payload->toArray();
+    }
+}

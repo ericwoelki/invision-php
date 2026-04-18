@@ -6,11 +6,13 @@ use EricWoelki\Invision\Applications\Pages\Payloads\CreateReviewPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\ListReviewsPayload;
 use EricWoelki\Invision\Applications\Pages\Payloads\UpdateReviewPayload;
 use EricWoelki\Invision\Applications\Pages\Requests\CreateReviewRequest;
+use EricWoelki\Invision\Applications\Pages\Requests\DeleteReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\GetReviewRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\ListReviewsRequest;
 use EricWoelki\Invision\Applications\Pages\Requests\UpdateReviewRequest;
 use EricWoelki\Invision\Data\Review;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -71,4 +73,14 @@ it('updates a review', function (): void {
     expect($review)
         ->toBeInstanceOf(Review::class)
         ->and($review->content)->toBe('::edited::');
+});
+
+it('deletes a review', function (): void {
+    $mock = MockClient::global([
+        DeleteReviewRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->pages()->reviews()->delete(databaseId: 1, reviewId: 1);
+
+    $mock->assertSent(DeleteReviewRequest::class);
 });

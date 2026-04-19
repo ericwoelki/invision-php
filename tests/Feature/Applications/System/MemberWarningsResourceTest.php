@@ -5,6 +5,7 @@ declare(strict_types=1);
 use EricWoelki\Invision\Applications\System\Payloads\CreateMemberWarningPayload;
 use EricWoelki\Invision\Applications\System\Payloads\DeleteMemberWarningPayload;
 use EricWoelki\Invision\Applications\System\Payloads\ListMemberWarningsPayload;
+use EricWoelki\Invision\Applications\System\Requests\AcknowledgeMemberWarningRequest;
 use EricWoelki\Invision\Applications\System\Requests\CreateMemberWarningRequest;
 use EricWoelki\Invision\Applications\System\Requests\DeleteMemberWarningRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetMemberWarningRequest;
@@ -64,4 +65,14 @@ it('deletes a member warning', function (): void {
     ));
 
     $mock->assertSent(DeleteMemberWarningRequest::class);
+});
+
+it('acknowledges a member warning', function (): void {
+    MockClient::global([
+        AcknowledgeMemberWarningRequest::class => new InvisionFixture('system/members/warnings/acknowledge'),
+    ]);
+
+    $warning = $this->invision->system()->members()->warnings()->acknowledge(memberId: 2, warningId: 1);
+
+    expect($warning)->toBeInstanceOf(Warning::class);
 });

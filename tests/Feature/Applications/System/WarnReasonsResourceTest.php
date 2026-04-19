@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\System\Payloads\CreateWarnReasonPayload;
+use EricWoelki\Invision\Applications\System\Payloads\UpdateWarnReasonPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateWarnReasonRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetWarnReasonRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListWarnReasonsRequest;
+use EricWoelki\Invision\Applications\System\Requests\UpdateWarnReasonRequest;
 use EricWoelki\Invision\Data\WarnReason;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -49,4 +51,19 @@ it('creates a warn reason', function (): void {
     expect($reason)
         ->toBeInstanceOf(WarnReason::class)
         ->and($reason->name)->toBe('::name::');
+});
+
+it('updates a warn reason', function (): void {
+    MockClient::global([
+        UpdateWarnReasonRequest::class => new InvisionFixture('system/warn-reasons/update'),
+    ]);
+
+    $reason = $this->invision->system()->warnReasons()->update(new UpdateWarnReasonPayload(
+        warnReasonId: 6,
+        name: '::edited::',
+    ));
+
+    expect($reason)
+        ->toBeInstanceOf(WarnReason::class)
+        ->and($reason->name)->toBe('::edited::');
 });

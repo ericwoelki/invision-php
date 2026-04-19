@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Events\Payloads\CreateCalendarPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\ListCalendarsPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\UpdateCalendarPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateCalendarRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteCalendarRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetCalendarRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListCalendarsRequest;
 use EricWoelki\Invision\Applications\Events\Requests\UpdateCalendarRequest;
@@ -43,5 +44,10 @@ final class CalendarsResource extends BaseResource
         $request = new UpdateCalendarRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteCalendarRequest($id));
     }
 }

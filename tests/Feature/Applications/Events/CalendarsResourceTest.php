@@ -5,11 +5,13 @@ declare(strict_types=1);
 use EricWoelki\Invision\Applications\Events\Payloads\CreateCalendarPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\UpdateCalendarPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateCalendarRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteCalendarRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetCalendarRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListCalendarsRequest;
 use EricWoelki\Invision\Applications\Events\Requests\UpdateCalendarRequest;
 use EricWoelki\Invision\Data\Calendar;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -65,4 +67,14 @@ it('updates a calendar', function (): void {
     expect($calendar)
         ->toBeInstanceOf(Calendar::class)
         ->and($calendar->name)->toBe('::edited::');
+});
+
+it('deletes a calendar', function (): void {
+    $mock = MockClient::global([
+        DeleteCalendarRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->events()->calendars()->delete(1);
+
+    $mock->assertSent(DeleteCalendarRequest::class);
 });

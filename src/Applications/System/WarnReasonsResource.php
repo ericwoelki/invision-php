@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\System\Payloads\CreateWarnReasonPayload;
 use EricWoelki\Invision\Applications\System\Payloads\ListWarnReasonsPayload;
 use EricWoelki\Invision\Applications\System\Payloads\UpdateWarnReasonPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateWarnReasonRequest;
+use EricWoelki\Invision\Applications\System\Requests\DeleteWarnReasonRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetWarnReasonRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListWarnReasonsRequest;
 use EricWoelki\Invision\Applications\System\Requests\UpdateWarnReasonRequest;
@@ -43,5 +44,10 @@ final class WarnReasonsResource extends BaseResource
         $request = new UpdateWarnReasonRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteWarnReasonRequest($id));
     }
 }

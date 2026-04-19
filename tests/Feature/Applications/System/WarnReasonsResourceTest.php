@@ -5,11 +5,13 @@ declare(strict_types=1);
 use EricWoelki\Invision\Applications\System\Payloads\CreateWarnReasonPayload;
 use EricWoelki\Invision\Applications\System\Payloads\UpdateWarnReasonPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateWarnReasonRequest;
+use EricWoelki\Invision\Applications\System\Requests\DeleteWarnReasonRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetWarnReasonRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListWarnReasonsRequest;
 use EricWoelki\Invision\Applications\System\Requests\UpdateWarnReasonRequest;
 use EricWoelki\Invision\Data\WarnReason;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -66,4 +68,14 @@ it('updates a warn reason', function (): void {
     expect($reason)
         ->toBeInstanceOf(WarnReason::class)
         ->and($reason->name)->toBe('::edited::');
+});
+
+it('deletes a warn reason', function (): void {
+    $mock = MockClient::global([
+        DeleteWarnReasonRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->system()->warnReasons()->delete(1);
+
+    $mock->assertSent(DeleteWarnReasonRequest::class);
 });

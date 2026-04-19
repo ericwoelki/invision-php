@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\Events;
 
+use EricWoelki\Invision\Applications\Events\Payloads\CreateVenuePayload;
 use EricWoelki\Invision\Applications\Events\Payloads\ListVenuesPayload;
+use EricWoelki\Invision\Applications\Events\Requests\CreateVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListVenuesRequest;
 use EricWoelki\Invision\Data\Venue;
@@ -23,6 +25,13 @@ final class VenuesResource extends BaseResource
     public function get(int $id): Venue
     {
         $request = new GetVenueRequest($id);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function create(CreateVenuePayload $payload): Venue
+    {
+        $request = new CreateVenueRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

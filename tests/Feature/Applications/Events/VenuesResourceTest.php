@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Events\Payloads\CreateVenuePayload;
+use EricWoelki\Invision\Applications\Events\Requests\CreateVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListVenuesRequest;
+use EricWoelki\Invision\Data\Geolocation;
 use EricWoelki\Invision\Data\Venue;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -32,4 +35,21 @@ it('gets a venue', function (): void {
     $venue = $this->invision->events()->venues()->get(1);
 
     expect($venue)->toBeInstanceOf(Venue::class);
+});
+
+it('creates a venue', function (): void {
+    MockClient::global([
+        CreateVenueRequest::class => new InvisionFixture('events/venues/create'),
+    ]);
+
+    $venue = $this->invision->events()->venues()->create(new CreateVenuePayload(
+        title: '::title::',
+        address: new Geolocation(
+            country: 'GB',
+        ),
+    ));
+
+    expect($venue)
+        ->toBeInstanceOf(Venue::class)
+        ->and($venue->title)->toBe('::title::');
 });

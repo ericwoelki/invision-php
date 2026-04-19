@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision;
 
+use EricWoelki\Invision\Applications\EventsApplication;
 use EricWoelki\Invision\Applications\ForumsApplication;
 use EricWoelki\Invision\Applications\PagesApplication;
 use EricWoelki\Invision\Applications\SystemApplication;
@@ -45,6 +46,11 @@ final class InvisionConnector extends Connector implements HasPagination
     public function pages(): PagesApplication
     {
         return new PagesApplication($this);
+    }
+
+    public function events(): EventsApplication
+    {
+        return new EventsApplication($this);
     }
 
     protected function defaultAuth(): BasicAuthenticator

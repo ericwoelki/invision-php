@@ -1,0 +1,25 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Sun, 19 Apr 2026 06:07:27 GMT",
+        "Server": "Apache\/2.4.58 (Ubuntu)",
+        "Set-Cookie": "REDACTED",
+        "Expires": "Sun, 19 Apr 2026 06:08:27 GMT",
+        "Cache-Control": "no-cache=\"Set-Cookie\", max-age=60, public, s-maxage=60, stale-while-revalidate, stale-if-error",
+        "Pragma": "no-cache",
+        "X-IPS-LoggedIn": "0",
+        "Vary": "Cookie",
+        "Content-Length": "694",
+        "X-XSS-Protection": "0",
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "X-Frame-Options": "sameorigin",
+        "Content-Security-Policy": "frame-ancestors 'self'",
+        "X-Content-Security-Policy": "frame-ancestors 'self'",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Last-Modified": "Sun, 19 Apr 2026 06:07:27 GMT",
+        "Connection": "close",
+        "Content-Type": "application\/json;charset=UTF-8"
+    },
+    "data": "{\"page\":1,\"perPage\":25,\"totalResults\":1,\"totalPages\":1,\"results\":[{\"id\":1,\"name\":\"Community Calendar\",\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/events\\\/1-community-calendar\\\/?view=month\",\"class\":\"IPS\\\\calendar\\\\Calendar\",\"parentId\":null,\"permissions\":{\"perm_id\":3,\"perm_view\":\"*\",\"perm_2\":\"*\",\"perm_3\":\"3,4,6\",\"perm_4\":\"3,4,6\",\"perm_5\":\"3,4,6\",\"perm_6\":\"3,4,6\",\"perm_7\":\"3,4,6\"},\"club\":0}]}",
+    "context": []
+}

@@ -1,0 +1,25 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Sun, 19 Apr 2026 05:14:51 GMT",
+        "Server": "Apache\/2.4.58 (Ubuntu)",
+        "Set-Cookie": "REDACTED",
+        "Expires": "Sun, 19 Apr 2026 05:15:51 GMT",
+        "Cache-Control": "no-cache=\"Set-Cookie\", max-age=60, public, s-maxage=60, stale-while-revalidate, stale-if-error",
+        "Pragma": "no-cache",
+        "X-IPS-LoggedIn": "0",
+        "Vary": "Cookie",
+        "Content-Length": "1522",
+        "X-XSS-Protection": "0",
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "X-Frame-Options": "sameorigin",
+        "Content-Security-Policy": "frame-ancestors 'self'",
+        "X-Content-Security-Policy": "frame-ancestors 'self'",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Last-Modified": "Sun, 19 Apr 2026 05:14:51 GMT",
+        "Connection": "close",
+        "Content-Type": "application\/json;charset=UTF-8"
+    },
+    "data": "{\"page\":1,\"perPage\":25,\"totalResults\":5,\"totalPages\":1,\"results\":[{\"id\":1,\"name\":\"Spamming\",\"defaultNotes\":null,\"points\":1,\"pointsOverride\":true,\"pointsAutoRemove\":true,\"removePoints\":null,\"removeOverride\":true},{\"id\":2,\"name\":\"Inappropriate Language\",\"defaultNotes\":null,\"points\":1,\"pointsOverride\":true,\"pointsAutoRemove\":true,\"removePoints\":null,\"removeOverride\":true},{\"id\":3,\"name\":\"Signature Violation\",\"defaultNotes\":null,\"points\":1,\"pointsOverride\":true,\"pointsAutoRemove\":true,\"removePoints\":null,\"removeOverride\":true},{\"id\":4,\"name\":\"Abusive Behaviour\",\"defaultNotes\":null,\"points\":1,\"pointsOverride\":true,\"pointsAutoRemove\":true,\"removePoints\":null,\"removeOverride\":true},{\"id\":5,\"name\":\"Topic Bumping\",\"defaultNotes\":null,\"points\":1,\"pointsOverride\":true,\"pointsAutoRemove\":true,\"removePoints\":null,\"removeOverride\":true}]}",
+    "context": []
+}

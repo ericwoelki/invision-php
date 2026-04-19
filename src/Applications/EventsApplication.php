@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EricWoelki\Invision\Applications;
 
 use EricWoelki\Invision\Applications\Events\CalendarsResource;
+use EricWoelki\Invision\Applications\Events\VenuesResource;
 use Saloon\Http\BaseResource;
 
 final class EventsApplication extends BaseResource
@@ -12,5 +13,10 @@ final class EventsApplication extends BaseResource
     public function calendars(): CalendarsResource
     {
         return new CalendarsResource($this->connector);
+    }
+
+    public function venues(): VenuesResource
+    {
+        return new VenuesResource($this->connector);
     }
 }

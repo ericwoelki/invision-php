@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\System\Payloads\ListMemberWarningsPayload;
+use EricWoelki\Invision\Applications\System\Requests\GetMemberWarningRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListMemberWarningsRequest;
 use EricWoelki\Invision\Data\Warning;
 use Saloon\Http\Faking\MockClient;
@@ -22,4 +23,14 @@ it('lists member warnings', function (): void {
     expect($warnings)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Warning::class);
+});
+
+it('gets a member warning', function (): void {
+    MockClient::global([
+        GetMemberWarningRequest::class => new InvisionFixture('system/members/warnings/get'),
+    ]);
+
+    $warning = $this->invision->system()->members()->warnings()->get(memberId: 2, warningId: 1);
+
+    expect($warning)->toBeInstanceOf(Warning::class);
 });

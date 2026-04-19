@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Events\Payloads\CreateCalendarPayload;
+use EricWoelki\Invision\Applications\Events\Requests\CreateCalendarRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetCalendarRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListCalendarsRequest;
 use EricWoelki\Invision\Data\Calendar;
@@ -32,4 +34,18 @@ it('gets a calendar', function (): void {
     $calendar = $this->invision->events()->calendars()->get(1);
 
     expect($calendar)->toBeInstanceOf(Calendar::class);
+});
+
+it('creates a calendar', function (): void {
+    MockClient::global([
+        CreateCalendarRequest::class => new InvisionFixture('events/calendars/create'),
+    ]);
+
+    $calendar = $this->invision->events()->calendars()->create(new CreateCalendarPayload(
+        title: '::title::',
+    ));
+
+    expect($calendar)
+        ->toBeInstanceOf(Calendar::class)
+        ->and($calendar->name)->toBe('::title::');
 });

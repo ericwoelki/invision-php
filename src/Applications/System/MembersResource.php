@@ -26,6 +26,11 @@ final class MembersResource extends BaseResource
         return new MemberFollowsResource($this->connector);
     }
 
+    public function warnings(): MemberWarningsResource
+    {
+        return new MemberWarningsResource($this->connector);
+    }
+
     /** @return array<int, Member> */
     public function list(?ListMembersPayload $payload = null): array
     {

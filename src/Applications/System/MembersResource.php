@@ -16,6 +16,11 @@ use Saloon\Http\BaseResource;
 
 final class MembersResource extends BaseResource
 {
+    public function notifications(): MemberNotificationsResource
+    {
+        return new MemberNotificationsResource($this->connector);
+    }
+
     public function follows(): MemberFollowsResource
     {
         return new MemberFollowsResource($this->connector);

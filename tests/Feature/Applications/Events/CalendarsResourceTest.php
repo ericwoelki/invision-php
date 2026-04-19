@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Events\Payloads\CreateCalendarPayload;
+use EricWoelki\Invision\Applications\Events\Payloads\UpdateCalendarPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateCalendarRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetCalendarRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListCalendarsRequest;
+use EricWoelki\Invision\Applications\Events\Requests\UpdateCalendarRequest;
 use EricWoelki\Invision\Data\Calendar;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -48,4 +50,19 @@ it('creates a calendar', function (): void {
     expect($calendar)
         ->toBeInstanceOf(Calendar::class)
         ->and($calendar->name)->toBe('::title::');
+});
+
+it('updates a calendar', function (): void {
+    MockClient::global([
+        UpdateCalendarRequest::class => new InvisionFixture('events/calendars/update'),
+    ]);
+
+    $calendar = $this->invision->events()->calendars()->update(new UpdateCalendarPayload(
+        calendarId: 2,
+        title: '::edited::',
+    ));
+
+    expect($calendar)
+        ->toBeInstanceOf(Calendar::class)
+        ->and($calendar->name)->toBe('::edited::');
 });

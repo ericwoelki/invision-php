@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Events\Requests\GetVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListVenuesRequest;
 use EricWoelki\Invision\Data\Venue;
 use Saloon\Http\Faking\MockClient;
@@ -21,4 +22,14 @@ it('lists venues', function (): void {
     expect($venues)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Venue::class);
+});
+
+it('gets a venue', function (): void {
+    MockClient::global([
+        GetVenueRequest::class => new InvisionFixture('events/venues/get'),
+    ]);
+
+    $venue = $this->invision->events()->venues()->get(1);
+
+    expect($venue)->toBeInstanceOf(Venue::class);
 });

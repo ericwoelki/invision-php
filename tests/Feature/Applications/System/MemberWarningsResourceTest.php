@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\System\Payloads\CreateMemberWarningPayload;
 use EricWoelki\Invision\Applications\System\Payloads\ListMemberWarningsPayload;
+use EricWoelki\Invision\Applications\System\Requests\CreateMemberWarningRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetMemberWarningRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListMemberWarningsRequest;
 use EricWoelki\Invision\Data\Warning;
@@ -31,6 +33,19 @@ it('gets a member warning', function (): void {
     ]);
 
     $warning = $this->invision->system()->members()->warnings()->get(memberId: 2, warningId: 1);
+
+    expect($warning)->toBeInstanceOf(Warning::class);
+});
+
+it('creates a member warning', function (): void {
+    MockClient::global([
+        CreateMemberWarningRequest::class => new InvisionFixture('system/members/warnings/create'),
+    ]);
+
+    $warning = $this->invision->system()->members()->warnings()->create(new CreateMemberWarningPayload(
+        memberId: 2,
+        moderatorId: 1,
+    ));
 
     expect($warning)->toBeInstanceOf(Warning::class);
 });

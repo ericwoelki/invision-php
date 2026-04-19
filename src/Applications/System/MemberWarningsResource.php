@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\System;
 
+use EricWoelki\Invision\Applications\System\Payloads\CreateMemberWarningPayload;
 use EricWoelki\Invision\Applications\System\Payloads\ListMemberWarningsPayload;
+use EricWoelki\Invision\Applications\System\Requests\CreateMemberWarningRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetMemberWarningRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListMemberWarningsRequest;
 use EricWoelki\Invision\Data\Warning;
@@ -23,6 +25,13 @@ final class MemberWarningsResource extends BaseResource
     public function get(int $memberId, int $warningId): Warning
     {
         $request = new GetMemberWarningRequest($memberId, $warningId);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function create(CreateMemberWarningPayload $payload): Warning
+    {
+        $request = new CreateMemberWarningRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

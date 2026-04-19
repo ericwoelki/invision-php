@@ -10,8 +10,8 @@ use Carbon\CarbonImmutable;
  * @phpstan-import-type MemberData from Member
  * @phpstan-import-type WarnReasonData from WarnReason
  *
- * @phpstan-type WarningData array{id: int, member: MemberData, moderator: MemberData, points: int, reason: WarnReasonData,
- *  expiration: string|int, date: string, acknowledged: bool, memberNotes: string, moderatorNotes: string,
+ * @phpstan-type WarningData array{id: int, member: MemberData, moderator: MemberData, points: int, reason: WarnReasonData|null,
+ *  expiration: string|int, date: string, acknowledged: bool, memberNotes: string|null, moderatorNotes: string|null,
  *  modQueuePermanent: bool, modQueue: string|null, restrictPostsPermanent: bool, restrictPosts: string|null, suspendPermanent: bool, suspend: string|null}
  */
 final readonly class Warning
@@ -21,12 +21,12 @@ final readonly class Warning
         public Member $member,
         public Member $moderator,
         public int $points,
-        public WarnReason $reason,
+        public ?WarnReason $reason,
         public ?CarbonImmutable $expiration,
         public CarbonImmutable $date,
         public bool $acknowledged,
-        public string $memberNotes,
-        public string $moderatorNotes,
+        public ?string $memberNotes,
+        public ?string $moderatorNotes,
         public bool $modQueuePermanent,
         public ?string $modQueue,
         public bool $restrictPostsPermanent,
@@ -43,7 +43,7 @@ final readonly class Warning
             member: Member::fromArray($data['member']),
             moderator: Member::fromArray($data['moderator']),
             points: $data['points'],
-            reason: WarnReason::fromArray($data['reason']),
+            reason: $data['reason'] !== null ? WarnReason::fromArray($data['reason']) : null,
             expiration: $data['expiration'] !== -1 ? CarbonImmutable::parse($data['expiration']) : null,
             date: CarbonImmutable::parse($data['date']),
             acknowledged: $data['acknowledged'],

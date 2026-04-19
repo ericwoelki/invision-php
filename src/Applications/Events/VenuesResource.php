@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Events\Payloads\CreateVenuePayload;
 use EricWoelki\Invision\Applications\Events\Payloads\ListVenuesPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\UpdateVenuePayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateVenueRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListVenuesRequest;
 use EricWoelki\Invision\Applications\Events\Requests\UpdateVenueRequest;
@@ -43,5 +44,10 @@ final class VenuesResource extends BaseResource
         $request = new UpdateVenueRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteVenueRequest($id));
     }
 }

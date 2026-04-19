@@ -26,7 +26,7 @@ final readonly class Geolocation
         return new self(
             latitude: $data['lat'],
             longitude: $data['long'],
-            addressLines: $data['addressLines'],
+            addressLines: array_filter($data['addressLines']),
             city: $data['city'],
             region: $data['region'],
             country: $data['country'],

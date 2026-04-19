@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\System\Payloads\CreateWarnReasonPayload;
+use EricWoelki\Invision\Applications\System\Requests\CreateWarnReasonRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetWarnReasonRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListWarnReasonsRequest;
 use EricWoelki\Invision\Data\WarnReason;
@@ -32,4 +34,19 @@ it('gets a warn reason', function (): void {
     $reason = $this->invision->system()->warnReasons()->get(1);
 
     expect($reason)->toBeInstanceOf(WarnReason::class);
+});
+
+it('creates a warn reason', function (): void {
+    MockClient::global([
+        CreateWarnReasonRequest::class => new InvisionFixture('system/warn-reasons/create'),
+    ]);
+
+    $reason = $this->invision->system()->warnReasons()->create(new CreateWarnReasonPayload(
+        name: '::name::',
+        points: 1,
+    ));
+
+    expect($reason)
+        ->toBeInstanceOf(WarnReason::class)
+        ->and($reason->name)->toBe('::name::');
 });

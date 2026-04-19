@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Events\Payloads\CreateVenuePayload;
+use EricWoelki\Invision\Applications\Events\Payloads\UpdateVenuePayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListVenuesRequest;
+use EricWoelki\Invision\Applications\Events\Requests\UpdateVenueRequest;
 use EricWoelki\Invision\Data\Geolocation;
 use EricWoelki\Invision\Data\Venue;
 use Saloon\Http\Faking\MockClient;
@@ -52,4 +54,19 @@ it('creates a venue', function (): void {
     expect($venue)
         ->toBeInstanceOf(Venue::class)
         ->and($venue->title)->toBe('::title::');
+});
+
+it('updates a venue', function (): void {
+    MockClient::global([
+        UpdateVenueRequest::class => new InvisionFixture('events/venues/update'),
+    ]);
+
+    $venue = $this->invision->events()->venues()->update(new UpdateVenuePayload(
+        venueId: 1,
+        title: '::edited::',
+    ));
+
+    expect($venue)
+        ->toBeInstanceOf(Venue::class)
+        ->and($venue->title)->toBe('::edited::');
 });

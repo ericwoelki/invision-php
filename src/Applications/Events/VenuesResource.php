@@ -6,9 +6,11 @@ namespace EricWoelki\Invision\Applications\Events;
 
 use EricWoelki\Invision\Applications\Events\Payloads\CreateVenuePayload;
 use EricWoelki\Invision\Applications\Events\Payloads\ListVenuesPayload;
+use EricWoelki\Invision\Applications\Events\Payloads\UpdateVenuePayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetVenueRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListVenuesRequest;
+use EricWoelki\Invision\Applications\Events\Requests\UpdateVenueRequest;
 use EricWoelki\Invision\Data\Venue;
 use Saloon\Http\BaseResource;
 
@@ -32,6 +34,13 @@ final class VenuesResource extends BaseResource
     public function create(CreateVenuePayload $payload): Venue
     {
         $request = new CreateVenueRequest($payload);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function update(UpdateVenuePayload $payload): Venue
+    {
+        $request = new UpdateVenueRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

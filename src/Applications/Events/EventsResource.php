@@ -22,6 +22,11 @@ final class EventsResource extends BaseResource
         return new EventCommentsResource($this->connector);
     }
 
+    public function reviews(): EventReviewsResource
+    {
+        return new EventReviewsResource($this->connector);
+    }
+
     /** @return array<int, Event> */
     public function list(?ListEventsPayload $payload = null): array
     {

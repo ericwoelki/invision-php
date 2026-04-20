@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+namespace EricWoelki\Invision\Applications\Events\Requests;
+
+use EricWoelki\Invision\Applications\Events\Payloads\ListEventReviewsPayload;
+use EricWoelki\Invision\Data\Review;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+use Saloon\Http\Response;
+
+/** @phpstan-import-type ReviewData from Review */
+final class ListEventReviewsRequest extends Request
+{
+    protected Method $method = Method::GET;
+
+    public function __construct(
+        private readonly ListEventReviewsPayload $payload,
+    ) {}
+
+    public function resolveEndpoint(): string
+    {
+        return "calendar/events/{$this->payload->eventId}/reviews";
+    }
+
+    /** @return array<int, Review> */
+    public function createDtoFromResponse(Response $response): array
+    {
+        /** @var array<int, ReviewData> $data */
+        $data = $response->json('results');
+
+        return array_map(Review::fromArray(...), $data);
+    }
+
+    protected function defaultQuery(): array
+    {
+        return $this->payload->toArray();
+    }
+}

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 use Carbon\CarbonImmutable;
 use EricWoelki\Invision\Applications\Events\Payloads\CreateEventPayload;
+use EricWoelki\Invision\Applications\Events\Payloads\UpdateEventPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateEventRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetEventRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListEventsRequest;
+use EricWoelki\Invision\Applications\Events\Requests\UpdateEventRequest;
 use EricWoelki\Invision\Data\Event;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -53,4 +55,23 @@ it('creates an event', function (): void {
     expect($event)
         ->toBeInstanceOf(Event::class)
         ->and($event->title)->toBe('::title::');
+});
+
+it('updates an event', function (): void {
+    MockClient::global([
+        UpdateEventRequest::class => new InvisionFixture('events/events/update'),
+    ]);
+
+    $event = $this->invision->events()->events()->update(new UpdateEventPayload(
+        eventId: 2,
+        calendarId: 1,
+        title: '::edited::',
+        description: '::description::',
+        authorId: 1,
+        start: CarbonImmutable::now()->addDays(3)->startOfDay()->toIso8601String(),
+    ));
+
+    expect($event)
+        ->toBeInstanceOf(Event::class)
+        ->and($event->title)->toBe('::edited::');
 });

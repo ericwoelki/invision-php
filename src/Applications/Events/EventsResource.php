@@ -27,6 +27,11 @@ final class EventsResource extends BaseResource
         return new EventReviewsResource($this->connector);
     }
 
+    public function rsvps(): EventRSVPsResource
+    {
+        return new EventRSVPsResource($this->connector);
+    }
+
     /** @return array<int, Event> */
     public function list(?ListEventsPayload $payload = null): array
     {

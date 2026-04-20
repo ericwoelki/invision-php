@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Events\Payloads\CreateEventRSVPPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateEventRSVPRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteEventRSVPRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListEventRSVPsRequest;
 use EricWoelki\Invision\Data\EventRSVPs;
 use EricWoelki\Invision\Enums\EventAttendance;
@@ -37,4 +38,14 @@ it('creates an event rsvp', function (): void {
     ));
 
     $mock->assertSent(CreateEventRSVPRequest::class);
+});
+
+it('deletes an event rsvp', function (): void {
+    $mock = MockClient::global([
+        DeleteEventRSVPRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->events()->events()->rsvps()->delete(eventId: 1, memberId: 1);
+
+    $mock->assertSent(DeleteEventRSVPRequest::class);
 });

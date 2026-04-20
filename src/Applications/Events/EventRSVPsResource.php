@@ -6,6 +6,7 @@ namespace EricWoelki\Invision\Applications\Events;
 
 use EricWoelki\Invision\Applications\Events\Payloads\CreateEventRSVPPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateEventRSVPRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteEventRSVPRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListEventRSVPsRequest;
 use EricWoelki\Invision\Data\EventRSVPs;
 use Saloon\Http\BaseResource;
@@ -22,5 +23,10 @@ final class EventRSVPsResource extends BaseResource
     public function create(CreateEventRSVPPayload $payload): void
     {
         $this->connector->send(new CreateEventRSVPRequest($payload));
+    }
+
+    public function delete(int $eventId, int $memberId): void
+    {
+        $this->connector->send(new DeleteEventRSVPRequest($eventId, $memberId));
     }
 }

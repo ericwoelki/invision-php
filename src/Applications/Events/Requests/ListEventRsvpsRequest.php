@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\Events\Requests;
 
-use EricWoelki\Invision\Data\EventRSVPs;
+use EricWoelki\Invision\Data\EventRsvps;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
-/** @phpstan-import-type EventRSVPsData from EventRSVPs */
-final class ListEventRSVPsRequest extends Request
+/** @phpstan-import-type EventRsvpsData from EventRsvps */
+final class ListEventRsvpsRequest extends Request
 {
     protected Method $method = Method::GET;
 
@@ -23,11 +23,11 @@ final class ListEventRSVPsRequest extends Request
         return "calendar/events/{$this->id}/rsvps";
     }
 
-    public function createDtoFromResponse(Response $response): EventRSVPs
+    public function createDtoFromResponse(Response $response): EventRsvps
     {
-        /** @var EventRSVPsData $data */
+        /** @var EventRsvpsData $data */
         $data = $response->json();
 
-        return EventRSVPs::fromArray($data);
+        return EventRsvps::fromArray($data);
     }
 }

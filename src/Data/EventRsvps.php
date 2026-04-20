@@ -7,9 +7,9 @@ namespace EricWoelki\Invision\Data;
 /**
  * @phpstan-import-type MemberData from Member
  *
- * @phpstan-type EventRSVPsData array{attending: list<MemberData>, notAttending: list<MemberData>, maybeAttending: list<MemberData>}
+ * @phpstan-type EventRsvpsData array{attending: list<MemberData>, notAttending: list<MemberData>, maybeAttending: list<MemberData>}
  */
-final readonly class EventRSVPs
+final readonly class EventRsvps
 {
     /**
      * @param  list<Member>  $attending
@@ -22,8 +22,8 @@ final readonly class EventRSVPs
         public array $maybeAttending,
     ) {}
 
-    /** @param EventRSVPsData $data */
-    public static function fromArray(array $data): EventRSVPs
+    /** @param EventRsvpsData $data */
+    public static function fromArray(array $data): EventRsvps
     {
         return new self(
             attending: array_map(Member::fromArray(...), $data['attending']),

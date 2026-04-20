@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\Events\Requests;
 
-use EricWoelki\Invision\Applications\Events\Payloads\CreateEventRSVPPayload;
+use EricWoelki\Invision\Applications\Events\Payloads\CreateEventRsvpPayload;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Traits\Body\HasFormBody;
 
-final class CreateEventRSVPRequest extends Request implements HasBody
+final class CreateEventRsvpRequest extends Request implements HasBody
 {
     use HasFormBody;
 
     protected Method $method = Method::PUT;
 
     public function __construct(
-        private readonly CreateEventRSVPPayload $payload,
+        private readonly CreateEventRsvpPayload $payload,
     ) {}
 
     public function resolveEndpoint(): string

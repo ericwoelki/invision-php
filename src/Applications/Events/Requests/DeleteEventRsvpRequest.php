@@ -7,7 +7,7 @@ namespace EricWoelki\Invision\Applications\Events\Requests;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-final class DeleteEventRSVPRequest extends Request
+final class DeleteEventRsvpRequest extends Request
 {
     protected Method $method = Method::DELETE;
 

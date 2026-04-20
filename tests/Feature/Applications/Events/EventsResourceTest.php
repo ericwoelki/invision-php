@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Events\Requests\GetEventRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListEventsRequest;
 use EricWoelki\Invision\Data\Event;
 use Saloon\Http\Faking\MockClient;
@@ -21,4 +22,14 @@ it('lists events', function (): void {
     expect($events)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Event::class);
+});
+
+it('gets an event', function (): void {
+    MockClient::global([
+        GetEventRequest::class => new InvisionFixture('events/events/get'),
+    ]);
+
+    $event = $this->invision->events()->events()->get(1);
+
+    expect($event)->toBeInstanceOf(Event::class);
 });

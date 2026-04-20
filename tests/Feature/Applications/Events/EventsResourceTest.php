@@ -6,11 +6,13 @@ use Carbon\CarbonImmutable;
 use EricWoelki\Invision\Applications\Events\Payloads\CreateEventPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\UpdateEventPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateEventRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteEventRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetEventRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListEventsRequest;
 use EricWoelki\Invision\Applications\Events\Requests\UpdateEventRequest;
 use EricWoelki\Invision\Data\Event;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -74,4 +76,14 @@ it('updates an event', function (): void {
     expect($event)
         ->toBeInstanceOf(Event::class)
         ->and($event->title)->toBe('::edited::');
+});
+
+it('deletes an event', function (): void {
+    $mock = MockClient::global([
+        DeleteEventRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->events()->events()->delete(1);
+
+    $mock->assertSent(DeleteEventRequest::class);
 });

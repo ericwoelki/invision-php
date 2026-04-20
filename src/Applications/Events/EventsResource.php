@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Events\Payloads\CreateEventPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\ListEventsPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\UpdateEventPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateEventRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteEventRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetEventRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListEventsRequest;
 use EricWoelki\Invision\Applications\Events\Requests\UpdateEventRequest;
@@ -43,5 +44,10 @@ final class EventsResource extends BaseResource
         $request = new UpdateEventRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteEventRequest($id));
     }
 }

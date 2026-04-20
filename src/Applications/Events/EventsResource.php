@@ -17,6 +17,11 @@ use Saloon\Http\BaseResource;
 
 final class EventsResource extends BaseResource
 {
+    public function comments(): EventCommentsResource
+    {
+        return new EventCommentsResource($this->connector);
+    }
+
     /** @return array<int, Event> */
     public function list(?ListEventsPayload $payload = null): array
     {

@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Events\Payloads\CreateReviewPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\ListReviewsPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\UpdateReviewPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateReviewRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteReviewRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetReviewRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListReviewsRequest;
 use EricWoelki\Invision\Applications\Events\Requests\UpdateReviewRequest;
@@ -43,5 +44,10 @@ final class ReviewsResource extends BaseResource
         $request = new UpdateReviewRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteReviewRequest($id));
     }
 }

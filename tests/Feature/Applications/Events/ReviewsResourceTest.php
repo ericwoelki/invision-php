@@ -5,11 +5,13 @@ declare(strict_types=1);
 use EricWoelki\Invision\Applications\Events\Payloads\CreateReviewPayload;
 use EricWoelki\Invision\Applications\Events\Payloads\UpdateReviewPayload;
 use EricWoelki\Invision\Applications\Events\Requests\CreateReviewRequest;
+use EricWoelki\Invision\Applications\Events\Requests\DeleteReviewRequest;
 use EricWoelki\Invision\Applications\Events\Requests\GetReviewRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListReviewsRequest;
 use EricWoelki\Invision\Applications\Events\Requests\UpdateReviewRequest;
 use EricWoelki\Invision\Data\Review;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -68,4 +70,14 @@ it('updates a review', function (): void {
     expect($review)
         ->toBeInstanceOf(Review::class)
         ->and($review->content)->toBe('::edited::');
+});
+
+it('deletes a review', function (): void {
+    $mock = MockClient::global([
+        DeleteReviewRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->events()->reviews()->delete(1);
+
+    $mock->assertSent(DeleteReviewRequest::class);
 });

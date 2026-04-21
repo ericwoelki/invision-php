@@ -22,6 +22,11 @@ final class ReviewsResource extends BaseResource
         return new ReviewReactionsResource($this->connector);
     }
 
+    public function reports(): ReviewReportsResource
+    {
+        return new ReviewReportsResource($this->connector);
+    }
+
     /** @return array<int, Review> */
     public function list(?ListReviewsPayload $payload = null): array
     {

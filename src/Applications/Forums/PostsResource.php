@@ -22,6 +22,11 @@ final class PostsResource extends BaseResource
         return new PostReactionsResource($this->connector);
     }
 
+    public function reports(): PostReportsResource
+    {
+        return new PostReportsResource($this->connector);
+    }
+
     /** @return array<int, Post> */
     public function list(?ListPostsPayload $payload = null): array
     {

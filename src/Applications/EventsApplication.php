@@ -7,6 +7,7 @@ namespace EricWoelki\Invision\Applications;
 use EricWoelki\Invision\Applications\Events\CalendarsResource;
 use EricWoelki\Invision\Applications\Events\CommentsResource;
 use EricWoelki\Invision\Applications\Events\EventsResource;
+use EricWoelki\Invision\Applications\Events\ReviewsResource;
 use EricWoelki\Invision\Applications\Events\VenuesResource;
 use Saloon\Http\BaseResource;
 
@@ -30,5 +31,10 @@ final class EventsApplication extends BaseResource
     public function comments(): CommentsResource
     {
         return new CommentsResource($this->connector);
+    }
+
+    public function reviews(): ReviewsResource
+    {
+        return new ReviewsResource($this->connector);
     }
 }

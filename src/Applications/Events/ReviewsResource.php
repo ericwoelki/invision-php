@@ -17,6 +17,11 @@ use Saloon\Http\BaseResource;
 
 final class ReviewsResource extends BaseResource
 {
+    public function reactions(): ReviewReactionsResource
+    {
+        return new ReviewReactionsResource($this->connector);
+    }
+
     /** @return array<int, Review> */
     public function list(?ListReviewsPayload $payload = null): array
     {

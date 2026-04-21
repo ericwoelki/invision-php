@@ -12,7 +12,7 @@ beforeEach(function (): void {
     $this->invision = invisionMock();
 });
 
-it('lists review reactions', function (): void {
+it('creates a review reaction', function (): void {
     MockClient::global([
         CreateReviewReactionRequest::class => new InvisionFixture('events/reviews/reactions/create'),
     ]);

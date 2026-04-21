@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Events\Requests\GetReviewRequest;
 use EricWoelki\Invision\Applications\Events\Requests\ListReviewsRequest;
 use EricWoelki\Invision\Data\Review;
 use Saloon\Http\Faking\MockClient;
@@ -21,4 +22,14 @@ it('lists reviews', function (): void {
     expect($reviews)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Review::class);
+});
+
+it('gets a review', function (): void {
+    MockClient::global([
+        GetReviewRequest::class => new InvisionFixture('events/reviews/get'),
+    ]);
+
+    $review = $this->invision->events()->reviews()->get(1);
+
+    expect($review)->toBeInstanceOf(Review::class);
 });

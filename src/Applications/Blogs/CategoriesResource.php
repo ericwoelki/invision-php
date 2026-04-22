@@ -6,9 +6,11 @@ namespace EricWoelki\Invision\Applications\Blogs;
 
 use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCategoryPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\ListCategoriesPayload;
+use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateCategoryPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCategoriesRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\UpdateCategoryRequest;
 use EricWoelki\Invision\Data\BlogCategory;
 use Saloon\Http\BaseResource;
 
@@ -32,6 +34,13 @@ final class CategoriesResource extends BaseResource
     public function create(CreateCategoryPayload $payload): BlogCategory
     {
         $request = new CreateCategoryRequest($payload);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function update(UpdateCategoryPayload $payload): BlogCategory
+    {
+        $request = new UpdateCategoryRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

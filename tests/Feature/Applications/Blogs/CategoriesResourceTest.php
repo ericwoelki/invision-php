@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCategoryPayload;
+use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateCategoryPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCategoriesRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\UpdateCategoryRequest;
 use EricWoelki\Invision\Data\BlogCategory;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -48,4 +50,19 @@ it('creates a category', function (): void {
     expect($category)
         ->toBeInstanceOf(BlogCategory::class)
         ->and($category->name)->toBe('::name::');
+});
+
+it('updates a category', function (): void {
+    MockClient::global([
+        UpdateCategoryRequest::class => new InvisionFixture('blogs/categories/update'),
+    ]);
+
+    $category = $this->invision->blogs()->categories()->update(new UpdateCategoryPayload(
+        categoryId: 2,
+        name: '::edited::',
+    ));
+
+    expect($category)
+        ->toBeInstanceOf(BlogCategory::class)
+        ->and($category->name)->toBe('::edited::');
 });

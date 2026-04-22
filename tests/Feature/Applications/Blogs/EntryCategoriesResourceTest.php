@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Blogs\Requests\DeleteEntryCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetEntryCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListEntryCategoriesRequest;
 use EricWoelki\Invision\Data\BlogCategory;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -32,4 +34,14 @@ it('gets a entry category', function (): void {
     $category = $this->invision->blogs()->entryCategories()->get(1);
 
     expect($category)->toBeInstanceOf(BlogCategory::class);
+});
+
+it('deletes a entry category', function (): void {
+    $mock = MockClient::global([
+        DeleteEntryCategoryRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->blogs()->entryCategories()->delete(1);
+
+    $mock->assertSent(DeleteEntryCategoryRequest::class);
 });

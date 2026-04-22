@@ -14,7 +14,7 @@ use Carbon\CarbonImmutable;
  *
  * @phpstan-type EntryData array{id: int, title: string, blog: BlogData, author: MemberData, draft: bool, date: string,
  *  entry: string, comments: int, views: int, prefix: string|null, tags: list<string>, locked: bool, hidden: bool, future: bool,
- *  pinned: bool, featured: bool, poll: PollData|null, url: string, rating: float, category: BlogCategoryData}
+ *  pinned: bool, featured: bool, poll: PollData|null, url: string, rating: float, category: BlogCategoryData|null}
  */
 final readonly class Entry
 {
@@ -26,7 +26,7 @@ final readonly class Entry
         public Member $author,
         public bool $draft,
         public CarbonImmutable $date,
-        public string $entry,
+        public string $content,
         public int $comments,
         public int $views,
         public ?string $prefix,
@@ -39,7 +39,7 @@ final readonly class Entry
         public ?Poll $poll,
         public string $url,
         public float $rating,
-        public BlogCategory $category,
+        public ?BlogCategory $category,
     ) {}
 
     /** @param EntryData $data */
@@ -52,7 +52,7 @@ final readonly class Entry
             author: Member::fromArray($data['author']),
             draft: $data['draft'],
             date: CarbonImmutable::parse($data['date']),
-            entry: $data['entry'],
+            content: $data['entry'],
             comments: $data['comments'],
             views: $data['views'],
             prefix: $data['prefix'],
@@ -65,7 +65,7 @@ final readonly class Entry
             poll: $data['poll'] !== null ? Poll::fromArray($data['poll']) : null,
             url: $data['url'],
             rating: $data['rating'],
-            category: BlogCategory::fromArray($data['category']),
+            category: $data['category'] !== null ? BlogCategory::fromArray($data['category']) : null,
         );
     }
 }

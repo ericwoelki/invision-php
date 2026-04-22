@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications\Blogs;
 
+use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCategoryPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\ListCategoriesPayload;
+use EricWoelki\Invision\Applications\Blogs\Requests\CreateCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCategoriesRequest;
 use EricWoelki\Invision\Data\BlogCategory;
@@ -23,6 +25,13 @@ final class CategoriesResource extends BaseResource
     public function get(int $id): BlogCategory
     {
         $request = new GetCategoryRequest($id);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function create(CreateCategoryPayload $payload): BlogCategory
+    {
+        $request = new CreateCategoryRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

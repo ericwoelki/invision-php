@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCategoryPayload;
+use EricWoelki\Invision\Applications\Blogs\Requests\CreateCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCategoriesRequest;
 use EricWoelki\Invision\Data\BlogCategory;
@@ -32,4 +34,18 @@ it('gets a category', function (): void {
     $category = $this->invision->blogs()->categories()->get(1);
 
     expect($category)->toBeInstanceOf(BlogCategory::class);
+});
+
+it('creates a category', function (): void {
+    MockClient::global([
+        CreateCategoryRequest::class => new InvisionFixture('blogs/categories/create'),
+    ]);
+
+    $category = $this->invision->blogs()->categories()->create(new CreateCategoryPayload(
+        name: '::name::',
+    ));
+
+    expect($category)
+        ->toBeInstanceOf(BlogCategory::class)
+        ->and($category->name)->toBe('::name::');
 });

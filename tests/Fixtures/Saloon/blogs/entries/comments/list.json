@@ -1,0 +1,25 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "Wed, 22 Apr 2026 03:18:18 GMT",
+        "Server": "Apache\/2.4.58 (Ubuntu)",
+        "Set-Cookie": "REDACTED",
+        "Expires": "Wed, 22 Apr 2026 03:19:18 GMT",
+        "Cache-Control": "no-cache=\"Set-Cookie\", max-age=60, public, s-maxage=60, stale-while-revalidate, stale-if-error",
+        "Pragma": "no-cache",
+        "X-IPS-LoggedIn": "0",
+        "Vary": "Cookie",
+        "Content-Length": "2805",
+        "X-XSS-Protection": "0",
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "X-Frame-Options": "sameorigin",
+        "Content-Security-Policy": "frame-ancestors 'self'",
+        "X-Content-Security-Policy": "frame-ancestors 'self'",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "Last-Modified": "Wed, 22 Apr 2026 03:18:18 GMT",
+        "Connection": "close",
+        "Content-Type": "application\/json;charset=UTF-8"
+    },
+    "data": "{\"page\":1,\"perPage\":25,\"totalResults\":1,\"totalPages\":1,\"results\":[{\"id\":1,\"item_id\":1,\"author\":{\"id\":1,\"name\":\"Admin\",\"title\":null,\"timeZone\":\"America\\\/New_York\",\"formattedName\":\"Admin\",\"primaryGroup\":{\"id\":4,\"name\":\"Administrators\",\"formattedName\":\"Administrators\"},\"secondaryGroups\":[],\"email\":\"REDACTED\",\"joined\":\"2026-04-04T00:58:06Z\",\"registrationIpAddress\":\"REDACTED\",\"warningPoints\":0,\"reputationPoints\":1,\"photoUrl\":\"data:image\\\/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201024%201024%22%20style%3D%22background%3A%2369c462%22%3E%3Cg%3E%3Ctext%20text-anchor%3D%22middle%22%20dy%3D%22.35em%22%20x%3D%22512%22%20y%3D%22512%22%20fill%3D%22%23ffffff%22%20font-size%3D%22700%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20Roboto%2C%20Helvetica%2C%20Arial%2C%20sans-serif%22%3EA%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fsvg%3E\",\"photoUrlIsDefault\":true,\"coverPhotoUrl\":\"\",\"profileUrl\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/profile\\\/1-admin\\\/\",\"validating\":false,\"posts\":19,\"lastActivity\":\"2026-04-22T03:18:05Z\",\"lastVisit\":\"2026-04-22T01:13:35Z\",\"lastPost\":\"2026-04-22T03:18:14Z\",\"birthday\":null,\"profileViews\":2,\"customFields\":{\"1\":{\"name\":\"Personal Information\",\"fields\":{\"1\":{\"name\":\"About Me\",\"value\":null}}}},\"rank\":{\"id\":2,\"name\":\"Apprentice\",\"icon\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/uploads\\\/monthly_2026_04\\\/3_Apprentice.svg\",\"points\":90},\"achievements_points\":148,\"allowAdminEmails\":false,\"completed\":true},\"date\":\"2026-04-22T03:18:14Z\",\"content\":\"<p>\\n\\tTest comment\\n<\\\/p>\\n\",\"hidden\":false,\"url\":\"http:\\\/\\\/localhost:8080\\\/ic4\\\/blogs\\\/entry\\\/1-test\\\/?do=findComment&comment=1\",\"reactions\":[]}]}",
+    "context": []
+}

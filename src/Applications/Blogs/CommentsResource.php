@@ -22,6 +22,11 @@ final class CommentsResource extends BaseResource
         return new CommentReactionsResource($this->connector);
     }
 
+    public function reports(): CommentReportsResource
+    {
+        return new CommentReportsResource($this->connector);
+    }
+
     /** @return array<int, Comment> */
     public function list(?ListCommentsPayload $payload = null): array
     {

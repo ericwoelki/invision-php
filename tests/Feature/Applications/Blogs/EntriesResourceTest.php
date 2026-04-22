@@ -5,11 +5,13 @@ declare(strict_types=1);
 use EricWoelki\Invision\Applications\Blogs\Payloads\CreateEntryPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateEntryPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateEntryRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\DeleteEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListEntriesRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\UpdateEntryRequest;
 use EricWoelki\Invision\Data\Entry;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -68,4 +70,14 @@ it('updates an entry', function (): void {
     expect($entry)
         ->toBeInstanceOf(Entry::class)
         ->and($entry->title)->toBe('::edited::');
+});
+
+it('deletes an entry', function (): void {
+    $mock = MockClient::global([
+        DeleteEntryRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->blogs()->entries()->delete(1);
+
+    $mock->assertSent(DeleteEntryRequest::class);
 });

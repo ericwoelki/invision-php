@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Blogs\Payloads\CreateEntryPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\ListEntriesPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateEntryPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateEntryRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\DeleteEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListEntriesRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\UpdateEntryRequest;
@@ -43,5 +44,10 @@ final class EntriesResource extends BaseResource
         $request = new UpdateEntryRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteEntryRequest($id));
     }
 }

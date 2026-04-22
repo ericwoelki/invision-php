@@ -15,7 +15,7 @@ use EricWoelki\Invision\Enums\ClubType;
  *
  * @phpstan-type ClubData array{id: int, name: string, url: string, type: string, approved: bool, created: string,
  *  memberCount: int, owner: MemberData, photo: string|null, paid: bool, featured: bool, location: GeolocationData|null,
- *  about: string, lastActivity: string, contentCount: int, coverPhotoUrl: string|null, coverOffset: string, coverPhotoColor: string,
+ *  about: string|null, lastActivity: string, contentCount: int|null, coverPhotoUrl: string|null, coverOffset: string, coverPhotoColor: string,
  *  members: list<MemberData>, leaders: list<MemberData>, moderators: list<MemberData>, fieldValues: list<FieldData>, nodes: list<ModelData>}
  */
 final readonly class Club
@@ -40,7 +40,7 @@ final readonly class Club
         public bool $paid,
         public bool $featured,
         public ?Geolocation $location,
-        public string $about,
+        public ?string $about,
         public CarbonImmutable $lastActivity,
         public int $contentCount,
         public ?string $coverPhotoUrl,
@@ -71,7 +71,7 @@ final readonly class Club
             location: $data['location'] !== null ? Geolocation::fromArray($data['location']) : null,
             about: $data['about'],
             lastActivity: CarbonImmutable::parse($data['lastActivity']),
-            contentCount: $data['contentCount'],
+            contentCount: $data['contentCount'] ?? 0,
             coverPhotoUrl: $data['coverPhotoUrl'],
             coverOffset: $data['coverOffset'],
             coverPhotoColor: $data['coverPhotoColor'],

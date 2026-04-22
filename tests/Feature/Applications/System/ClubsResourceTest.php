@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\System\Payloads\CreateClubPayload;
+use EricWoelki\Invision\Applications\System\Requests\CreateClubRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetClubRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListClubsRequest;
 use EricWoelki\Invision\Data\Club;
@@ -32,4 +34,19 @@ it('gets a club', function (): void {
     $club = $this->invision->system()->clubs()->get(1);
 
     expect($club)->toBeInstanceOf(Club::class);
+});
+
+it('creates a club', function (): void {
+    MockClient::global([
+        CreateClubRequest::class => new InvisionFixture('system/clubs/create'),
+    ]);
+
+    $club = $this->invision->system()->clubs()->create(new CreateClubPayload(
+        name: '::name::',
+        ownerId: 2,
+    ));
+
+    expect($club)
+        ->toBeInstanceOf(Club::class)
+        ->and($club->name)->toBe('::name::');
 });

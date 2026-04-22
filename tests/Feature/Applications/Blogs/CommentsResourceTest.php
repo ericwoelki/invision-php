@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCommentPayload;
+use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateCommentPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateCommentRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCommentRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCommentsRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\UpdateCommentRequest;
 use EricWoelki\Invision\Data\Comment;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -50,4 +52,19 @@ it('creates a comment', function (): void {
     expect($comment)
         ->toBeInstanceOf(Comment::class)
         ->and($comment->content)->toBe('::content::');
+});
+
+it('updates a comment', function (): void {
+    MockClient::global([
+        UpdateCommentRequest::class => new InvisionFixture('blogs/comments/update'),
+    ]);
+
+    $comment = $this->invision->blogs()->comments()->update(new UpdateCommentPayload(
+        commentId: 2,
+        content: '::edited::',
+    ));
+
+    expect($comment)
+        ->toBeInstanceOf(Comment::class)
+        ->and($comment->content)->toBe('::edited::');
 });

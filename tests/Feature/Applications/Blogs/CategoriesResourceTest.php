@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Blogs\Requests\GetCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCategoriesRequest;
 use EricWoelki\Invision\Data\BlogCategory;
 use Saloon\Http\Faking\MockClient;
@@ -21,4 +22,14 @@ it('lists categories', function (): void {
     expect($categories)
         ->toBeArray()
         ->toContainOnlyInstancesOf(BlogCategory::class);
+});
+
+it('gets a category', function (): void {
+    MockClient::global([
+        GetCategoryRequest::class => new InvisionFixture('blogs/categories/get'),
+    ]);
+
+    $category = $this->invision->blogs()->categories()->get(1);
+
+    expect($category)->toBeInstanceOf(BlogCategory::class);
 });

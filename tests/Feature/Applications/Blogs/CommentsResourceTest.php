@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Blogs\Requests\GetCommentRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCommentsRequest;
 use EricWoelki\Invision\Data\Comment;
 use Saloon\Http\Faking\MockClient;
@@ -21,4 +22,14 @@ it('lists comments', function (): void {
     expect($comments)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Comment::class);
+});
+
+it('gets a comment', function (): void {
+    MockClient::global([
+        GetCommentRequest::class => new InvisionFixture('blogs/comments/get'),
+    ]);
+
+    $comment = $this->invision->blogs()->comments()->get(1);
+
+    expect($comment)->toBeInstanceOf(Comment::class);
 });

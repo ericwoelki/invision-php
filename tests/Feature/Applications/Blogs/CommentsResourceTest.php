@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCommentPayload;
+use EricWoelki\Invision\Applications\Blogs\Requests\CreateCommentRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCommentRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCommentsRequest;
 use EricWoelki\Invision\Data\Comment;
@@ -32,4 +34,20 @@ it('gets a comment', function (): void {
     $comment = $this->invision->blogs()->comments()->get(1);
 
     expect($comment)->toBeInstanceOf(Comment::class);
+});
+
+it('creates a comment', function (): void {
+    MockClient::global([
+        CreateCommentRequest::class => new InvisionFixture('blogs/comments/create'),
+    ]);
+
+    $comment = $this->invision->blogs()->comments()->create(new CreateCommentPayload(
+        entryId: 2,
+        authorId: 1,
+        content: '::content::',
+    ));
+
+    expect($comment)
+        ->toBeInstanceOf(Comment::class)
+        ->and($comment->content)->toBe('::content::');
 });

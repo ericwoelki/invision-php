@@ -6,6 +6,7 @@ namespace EricWoelki\Invision\Applications;
 
 use EricWoelki\Invision\Applications\Blogs\BlogsResource;
 use EricWoelki\Invision\Applications\Blogs\CategoriesResource;
+use EricWoelki\Invision\Applications\Blogs\EntriesResource;
 use EricWoelki\Invision\Applications\Blogs\EntryCategoriesResource;
 use Saloon\Http\BaseResource;
 
@@ -24,5 +25,10 @@ final class BlogsApplication extends BaseResource
     public function blogs(): BlogsResource
     {
         return new BlogsResource($this->connector);
+    }
+
+    public function entries(): EntriesResource
+    {
+        return new EntriesResource($this->connector);
     }
 }

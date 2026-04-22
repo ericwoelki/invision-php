@@ -38,7 +38,7 @@ final readonly class UpdateForumPayload extends Payload
             'sitemap_priority' => $this->sitemapPriority,
             'min_content' => $this->minimumContent,
             'can_see_others' => $this->canSeeOthers,
-            'permissions' => $this->permissions,
+            'permissions' => $this->permissions?->toArray(),
             'redirect_url' => $this->redirectUrl,
         ]);
     }

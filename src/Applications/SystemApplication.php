@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace EricWoelki\Invision\Applications;
 
+use EricWoelki\Invision\Applications\System\ClubsResource;
 use EricWoelki\Invision\Applications\System\GroupsResource;
 use EricWoelki\Invision\Applications\System\MembersResource;
 use EricWoelki\Invision\Applications\System\MessagesResource;
@@ -13,6 +14,11 @@ use Saloon\Http\BaseResource;
 
 final class SystemApplication extends BaseResource
 {
+    public function clubs(): ClubsResource
+    {
+        return new ClubsResource($this->connector);
+    }
+
     public function groups(): GroupsResource
     {
         return new GroupsResource($this->connector);

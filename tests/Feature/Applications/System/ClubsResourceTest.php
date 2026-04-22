@@ -5,11 +5,13 @@ declare(strict_types=1);
 use EricWoelki\Invision\Applications\System\Payloads\CreateClubPayload;
 use EricWoelki\Invision\Applications\System\Payloads\UpdateClubPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateClubRequest;
+use EricWoelki\Invision\Applications\System\Requests\DeleteClubRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetClubRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListClubsRequest;
 use EricWoelki\Invision\Applications\System\Requests\UpdateClubRequest;
 use EricWoelki\Invision\Data\Club;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -66,4 +68,14 @@ it('updates a club', function (): void {
     expect($club)
         ->toBeInstanceOf(Club::class)
         ->and($club->name)->toBe('::edited::');
+});
+
+it('deletes a club', function (): void {
+    $mock = MockClient::global([
+        DeleteClubRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->system()->clubs()->delete(1);
+
+    $mock->assertSent(DeleteClubRequest::class);
 });

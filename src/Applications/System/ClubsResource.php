@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\System\Payloads\CreateClubPayload;
 use EricWoelki\Invision\Applications\System\Payloads\ListClubsPayload;
 use EricWoelki\Invision\Applications\System\Payloads\UpdateClubPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateClubRequest;
+use EricWoelki\Invision\Applications\System\Requests\DeleteClubRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetClubRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListClubsRequest;
 use EricWoelki\Invision\Applications\System\Requests\UpdateClubRequest;
@@ -43,5 +44,10 @@ final class ClubsResource extends BaseResource
         $request = new UpdateClubRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteClubRequest($id));
     }
 }

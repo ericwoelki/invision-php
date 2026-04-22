@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\Blogs\Payloads\CreateEntryPayload;
+use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateEntryPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListEntriesRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\UpdateEntryRequest;
 use EricWoelki\Invision\Data\Entry;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -51,4 +53,19 @@ it('creates an entry', function (): void {
     expect($entry)
         ->toBeInstanceOf(Entry::class)
         ->and($entry->title)->toBe('::title::');
+});
+
+it('updates an entry', function (): void {
+    MockClient::global([
+        UpdateEntryRequest::class => new InvisionFixture('blogs/entries/update'),
+    ]);
+
+    $entry = $this->invision->blogs()->entries()->update(new UpdateEntryPayload(
+        entryId: 2,
+        title: '::edited::',
+    ));
+
+    expect($entry)
+        ->toBeInstanceOf(Entry::class)
+        ->and($entry->title)->toBe('::edited::');
 });

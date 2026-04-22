@@ -6,9 +6,11 @@ namespace EricWoelki\Invision\Applications\Blogs;
 
 use EricWoelki\Invision\Applications\Blogs\Payloads\CreateEntryPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\ListEntriesPayload;
+use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateEntryPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListEntriesRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\UpdateEntryRequest;
 use EricWoelki\Invision\Data\Entry;
 use Saloon\Http\BaseResource;
 
@@ -32,6 +34,13 @@ final class EntriesResource extends BaseResource
     public function create(CreateEntryPayload $payload): Entry
     {
         $request = new CreateEntryRequest($payload);
+
+        return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function update(UpdateEntryPayload $payload): Entry
+    {
+        $request = new UpdateEntryRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
     }

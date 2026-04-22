@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Blogs\Requests\GetBlogRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListBlogsRequest;
 use EricWoelki\Invision\Data\Blog;
 use Saloon\Http\Faking\MockClient;
@@ -21,4 +22,14 @@ it('lists blogs', function (): void {
     expect($blogs)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Blog::class);
+});
+
+it('gets a blog', function (): void {
+    MockClient::global([
+        GetBlogRequest::class => new InvisionFixture('blogs/blogs/get'),
+    ]);
+
+    $blog = $this->invision->blogs()->blogs()->get(1);
+
+    expect($blog)->toBeInstanceOf(Blog::class);
 });

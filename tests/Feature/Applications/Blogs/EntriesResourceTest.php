@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use EricWoelki\Invision\Applications\Blogs\Requests\GetEntryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListEntriesRequest;
 use EricWoelki\Invision\Data\Entry;
 use Saloon\Http\Faking\MockClient;
@@ -21,4 +22,14 @@ it('lists entries', function (): void {
     expect($entries)
         ->toBeArray()
         ->toContainOnlyInstancesOf(Entry::class);
+});
+
+it('gets an entry', function (): void {
+    MockClient::global([
+        GetEntryRequest::class => new InvisionFixture('blogs/entries/get'),
+    ]);
+
+    $entry = $this->invision->blogs()->entries()->get(1);
+
+    expect($entry)->toBeInstanceOf(Entry::class);
 });

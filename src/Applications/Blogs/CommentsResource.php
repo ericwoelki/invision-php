@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCommentPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\ListCommentsPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateCommentPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateCommentRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\DeleteCommentRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCommentRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCommentsRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\UpdateCommentRequest;
@@ -43,5 +44,10 @@ final class CommentsResource extends BaseResource
         $request = new UpdateCommentRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteCommentRequest($id));
     }
 }

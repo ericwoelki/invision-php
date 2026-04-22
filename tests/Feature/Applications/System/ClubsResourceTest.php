@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\System\Payloads\CreateClubPayload;
+use EricWoelki\Invision\Applications\System\Payloads\UpdateClubPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateClubRequest;
 use EricWoelki\Invision\Applications\System\Requests\GetClubRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListClubsRequest;
+use EricWoelki\Invision\Applications\System\Requests\UpdateClubRequest;
 use EricWoelki\Invision\Data\Club;
 use Saloon\Http\Faking\MockClient;
 use Tests\Fixtures\InvisionFixture;
@@ -49,4 +51,19 @@ it('creates a club', function (): void {
     expect($club)
         ->toBeInstanceOf(Club::class)
         ->and($club->name)->toBe('::name::');
+});
+
+it('updates a club', function (): void {
+    MockClient::global([
+        UpdateClubRequest::class => new InvisionFixture('system/clubs/update'),
+    ]);
+
+    $club = $this->invision->system()->clubs()->update(new UpdateClubPayload(
+        clubId: 2,
+        name: '::edited::',
+    ));
+
+    expect($club)
+        ->toBeInstanceOf(Club::class)
+        ->and($club->name)->toBe('::edited::');
 });

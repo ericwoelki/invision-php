@@ -5,11 +5,13 @@ declare(strict_types=1);
 use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCategoryPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateCategoryPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateCategoryRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\DeleteCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCategoriesRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\UpdateCategoryRequest;
 use EricWoelki\Invision\Data\BlogCategory;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 use Tests\Fixtures\InvisionFixture;
 
 beforeEach(function (): void {
@@ -65,4 +67,14 @@ it('updates a category', function (): void {
     expect($category)
         ->toBeInstanceOf(BlogCategory::class)
         ->and($category->name)->toBe('::edited::');
+});
+
+it('deletes a category', function (): void {
+    $mock = MockClient::global([
+        DeleteCategoryRequest::class => MockResponse::make(),
+    ]);
+
+    $this->invision->blogs()->categories()->delete(1);
+
+    $mock->assertSent(DeleteCategoryRequest::class);
 });

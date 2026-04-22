@@ -8,6 +8,7 @@ use EricWoelki\Invision\Applications\Blogs\Payloads\CreateCategoryPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\ListCategoriesPayload;
 use EricWoelki\Invision\Applications\Blogs\Payloads\UpdateCategoryPayload;
 use EricWoelki\Invision\Applications\Blogs\Requests\CreateCategoryRequest;
+use EricWoelki\Invision\Applications\Blogs\Requests\DeleteCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\GetCategoryRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\ListCategoriesRequest;
 use EricWoelki\Invision\Applications\Blogs\Requests\UpdateCategoryRequest;
@@ -43,5 +44,10 @@ final class CategoriesResource extends BaseResource
         $request = new UpdateCategoryRequest($payload);
 
         return $request->createDtoFromResponse($this->connector->send($request));
+    }
+
+    public function delete(int $id): void
+    {
+        $this->connector->send(new DeleteCategoryRequest($id));
     }
 }

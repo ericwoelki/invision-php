@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use EricWoelki\Invision\Applications\System\Payloads\CreateClubMemberPayload;
 use EricWoelki\Invision\Applications\System\Requests\CreateClubMemberRequest;
+use EricWoelki\Invision\Applications\System\Requests\DeleteClubMemberRequest;
 use EricWoelki\Invision\Applications\System\Requests\ListClubMembersRequest;
 use EricWoelki\Invision\Data\ClubMembership;
 use Saloon\Http\Faking\MockClient;
@@ -32,6 +33,16 @@ it('creates a club member', function (): void {
         clubId: 1,
         memberId: 2,
     ));
+
+    expect($membership)->toBeInstanceOf(ClubMembership::class);
+});
+
+it('deletes a club member', function (): void {
+    MockClient::global([
+        DeleteClubMemberRequest::class => new InvisionFixture('system/clubs/members/delete'),
+    ]);
+
+    $membership = $this->invision->system()->clubs()->members()->delete(clubId: 1, memberId: 2);
 
     expect($membership)->toBeInstanceOf(ClubMembership::class);
 });

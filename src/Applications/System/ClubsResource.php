@@ -17,6 +17,11 @@ use Saloon\Http\BaseResource;
 
 final class ClubsResource extends BaseResource
 {
+    public function members(): ClubMembersResource
+    {
+        return new ClubMembersResource($this->connector);
+    }
+
     /** @return array<int, Club> */
     public function list(?ListClubsPayload $payload = null): array
     {

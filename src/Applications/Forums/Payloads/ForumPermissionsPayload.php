@@ -9,18 +9,18 @@ use EricWoelki\Invision\Payload;
 final readonly class ForumPermissionsPayload extends Payload
 {
     /**
-     * @param  string|list<int>  $view
-     * @param  string|list<int>  $read
-     * @param  string|list<int>  $add
-     * @param  string|list<int>  $reply
-     * @param  string|list<int>  $attachments
+     * @param  list<int>|string  $view
+     * @param  list<int>|string  $read
+     * @param  list<int>|string  $add
+     * @param  list<int>|string  $reply
+     * @param  list<int>|string  $attachments
      */
     public function __construct(
-        public string|array $view,
-        public string|array $read,
-        public string|array $add,
-        public string|array $reply,
-        public string|array $attachments,
+        public array|string $view,
+        public array|string $read,
+        public array|string $add,
+        public array|string $reply,
+        public array|string $attachments,
     ) {}
 
     public function toArray(): array
